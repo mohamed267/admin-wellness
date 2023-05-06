@@ -1,5 +1,3 @@
-import React, { PropsWithChildren } from 'react'
-import PropTypes from 'prop-types'
 import { Box, HStack, Icon, Text, Stack } from '@chakra-ui/react'
 
 

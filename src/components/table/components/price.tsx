@@ -1,8 +1,5 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { HStack, Text, useColorModeValue } from '@chakra-ui/react'
-import { FormattedDate, FormattedMessage, FormattedNumber, FormattedTime } from 'react-intl'
-import If from 'common/If'
+import { Text } from '@chakra-ui/react'
+import { FormattedNumber } from 'react-intl'
 
 type PriceProps = {
     value : number

@@ -1,6 +1,4 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Box, Center, Image } from '@chakra-ui/react'
+import { Center, Image } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 
 const SidebarLogo = () => {

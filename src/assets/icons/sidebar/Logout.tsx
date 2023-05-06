@@ -1,5 +1,3 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 
 const Logout = () => {
   return (
@@ -14,4 +12,4 @@ const Logout = () => {
 
 Logout.propTypes = {}
 
-export default Logout
+  export default Logout

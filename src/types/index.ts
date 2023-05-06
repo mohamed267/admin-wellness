@@ -1,6 +1,3 @@
-import { ReactNode } from "react";
-import { IconType } from "react-icons/lib";
-import { JsxElement } from "typescript";
 
 export type BaseEntity = {
     id: string;

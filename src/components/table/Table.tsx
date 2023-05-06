@@ -1,14 +1,7 @@
-import { 
-    Box, 
-    Button, 
-    Flex, 
-    Icon, 
-    IconButton, 
-    Stack, 
-    Text, 
-    Tfoot, 
-    Thead,
-    useColorModeValue
+import {
+  Flex, Stack,
+  Text, Thead,
+  useColorModeValue
 } from "@chakra-ui/react"
   
 // import { 
@@ -19,13 +12,13 @@ import {
 // } 
 
 import {
-    useTable , 
-    useSortBy , 
-    usePagination , 
-    useGlobalFilter
-}from "react-table"
+  useTable,
+  useSortBy,
+  usePagination,
+  useGlobalFilter
+} from "react-table"
   
-import {  useMemo } from "react"
+import { useMemo } from "react"
   
   
 import { Table, Tbody, Td, Th, Tr } from "@chakra-ui/react"
@@ -34,13 +27,10 @@ import Image from "./components/image"
 
 
 
-import {AiOutlineFilter} from "react-icons/ai"
-import {BiShowAlt } from "react-icons/bi"
 import UserType from "./components/userType"
 import Cell from "./components/cell"
 import Date from "./components/date"
 import Pagination from "components/pagination/Pagination"
-import If from "common/If"
 import { FormattedMessage } from "react-intl"
 import TicketCell from "./components/ticketCell"
 import Sort from "assets/icons/table/Sort"

@@ -1,8 +1,6 @@
-import React, { FormEvent, useRef } from 'react'
-import PropTypes from 'prop-types'
-import { Flex, HStack, Icon, Input, NumberInput, NumberInputField, Text } from '@chakra-ui/react'
+import { FormEvent, useRef } from 'react'
+import { HStack, Icon, NumberInput, NumberInputField, Text } from '@chakra-ui/react'
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai'
-import { Form } from 'react-router-dom'
 import { useDirectionContext } from 'contexts/directionContext'
 
 

@@ -2,7 +2,7 @@
 import { DashboardRoutes } from "features/dashboard/routes";
 import { EventsRoutes } from "features/events/routes";
 import { UsersRoutes } from "features/users/routes";
-import { Navigate, Outlet, useLocation, useNavigate, useRoutes } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 
 

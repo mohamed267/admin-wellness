@@ -1,4 +1,4 @@
-import { extendTheme, HTMLChakraProps , ThemeConfig, ThemingProps } from "@chakra-ui/react";
+import { extendTheme, HTMLChakraProps, ThemeConfig, ThemingProps } from "@chakra-ui/react";
 import { globalStyles } from "./styles";
 import { CardComponent } from "./additions/card";
 import { inputStyles } from "./components/input";

@@ -1,7 +1,4 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { HStack, IconButton, Text, useColorModeValue } from '@chakra-ui/react'
-import { FormattedDate, FormattedMessage, FormattedTime } from 'react-intl'
+import { IconButton, Text, useColorModeValue } from '@chakra-ui/react'
 import If from 'common/If'
 import { BiChevronLeft } from 'react-icons/bi'
 

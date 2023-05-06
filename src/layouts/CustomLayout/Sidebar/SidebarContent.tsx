@@ -1,11 +1,8 @@
-import React, { PropsWithChildren } from 'react'
-import PropTypes from 'prop-types'
-import { Box, Center, Stack } from '@chakra-ui/react'
+import { Box, Stack } from '@chakra-ui/react'
 import SidebarLogo from './SidebarLogo'
 import SidebarNavItem from './SidebarNavItem'
 import { SIDEBAR_ITEMS } from '../variables/SIDEBAR_ITEMS'
 import { SideBarItem } from 'types'
-import { activeMenu } from 'utils/activeMenu'
 import SidebarLogout from './SidebarLogout'
 
 const SidebarContent = () => {

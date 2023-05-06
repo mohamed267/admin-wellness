@@ -1,5 +1,3 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import HCollapse from 'common/Transitions/HorizentalCollapse'
 import { IconButton, Input, InputGroup, InputLeftElement, InputRightElement, useDisclosure } from '@chakra-ui/react'
 import Switcher from 'common/Switcher'

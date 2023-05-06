@@ -1,6 +1,6 @@
 import { ReactNode, Suspense } from "react"
 import { HashRouter as Router } from "react-router-dom"
-import {ChakraProvider, Text} from "@chakra-ui/react"
+import { ChakraProvider } from "@chakra-ui/react"
 import theme from "lib/theme"
 import { RtlProvider } from "./rtl"
 import TranslationProvider from "./translation"

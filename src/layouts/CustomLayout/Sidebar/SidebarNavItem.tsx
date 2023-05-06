@@ -1,8 +1,5 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { Box, Collapse, Flex, Icon, Stack, Text, useDisclosure } from '@chakra-ui/react'
 import { Link, useLocation } from 'react-router-dom'
-import Dashboard from 'assets/icons/sidebar/Dashboard'
 import { SideBarItem } from 'types'
 import { activeMenu } from 'utils/activeMenu'
 import If from 'common/If'

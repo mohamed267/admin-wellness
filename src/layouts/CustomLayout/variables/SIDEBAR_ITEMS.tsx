@@ -1,6 +1,3 @@
-import { IconType } from "react-icons/lib";
-import { RiReservedLine } from "react-icons/ri"
-import { AiOutlineSetting } from "react-icons/ai"
 import Dashboard from "assets/icons/sidebar/Dashboard";
 import User from "assets/icons/sidebar/User";
 import { SideBarItem } from "types";

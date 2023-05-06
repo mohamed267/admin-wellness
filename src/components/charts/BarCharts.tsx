@@ -1,6 +1,4 @@
-import React, { Component, useState } from 'react'
-import PropTypes from 'prop-types'
-import ReactApexChart from 'react-apexcharts'
+import ReactApexChart from 'react-apexcharts';
 import { Box } from '@chakra-ui/react';
 
 

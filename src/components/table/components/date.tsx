@@ -1,7 +1,5 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { HStack, Text, useColorModeValue } from '@chakra-ui/react'
-import { FormattedDate, FormattedMessage, FormattedTime } from 'react-intl'
+import { FormattedDate } from 'react-intl'
 import If from 'common/If'
 
 type DateProps = {

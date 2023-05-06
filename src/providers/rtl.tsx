@@ -4,7 +4,6 @@ import rtl from 'stylis-plugin-rtl'
 import { useLocation } from 'react-router-dom'
 import { ReactNode } from 'react'
 import { useIntl } from 'react-intl'
-import { Box } from '@chakra-ui/react'
 import { DirectionContext } from 'contexts/directionContext'
 
 // NB: A unique `key` is important for it to work!

@@ -1,6 +1,4 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Text, useColorModeValue } from '@chakra-ui/react'
+import { Text } from '@chakra-ui/react'
 
 type CellProps = {
     value : string

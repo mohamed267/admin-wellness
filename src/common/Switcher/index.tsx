@@ -1,6 +1,6 @@
 import If from "common/If";
 import { useDirectionContext } from "contexts/directionContext";
-import React, { ComponentElement, PropsWithChildren, ReactNode } from "react";
+import { PropsWithChildren } from "react";
 
 interface Props {
   Left: any;

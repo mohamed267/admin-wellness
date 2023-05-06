@@ -1,14 +1,12 @@
-import React, { useEffect  , useState} from 'react'
-import PropTypes from 'prop-types'
 import { Flex, Icon, Text } from '@chakra-ui/react'
 
 
 // icons
-import {BsCheck} from "react-icons/bs"
-import {SiStatuspal} from "react-icons/si"
-import {VscClose} from "react-icons/vsc"
-import {TiMediaPause} from "react-icons/ti"
-import {BsArrowClockwise} from "react-icons/bs"
+import { BsCheck } from "react-icons/bs"
+import { SiStatuspal } from "react-icons/si"
+import { VscClose } from "react-icons/vsc"
+import { TiMediaPause } from "react-icons/ti"
+import { BsArrowClockwise } from "react-icons/bs"
 
 
 const icons:any = {

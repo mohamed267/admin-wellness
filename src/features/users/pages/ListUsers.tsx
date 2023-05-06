@@ -3,7 +3,7 @@ import TableComponent from "components/table/Table"
 import { Link } from "react-router-dom"
 import { User } from "../types"
 
-import {users} from "../__fakedata/user"
+import { users } from "../__fakedata/user"
 import { usersColumns } from "../variables/table"
 
 const ListUsers = () => {

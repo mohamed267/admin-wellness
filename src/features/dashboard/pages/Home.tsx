@@ -1,6 +1,4 @@
-import { HStack, Icon, Stack, Text } from "@chakra-ui/react"
-import Sec from "assets/icons/navbar/Sec"
-import SearchBar from "components/SearchBar"
+import { Stack } from "@chakra-ui/react"
 import StatisticsBoxes from "../components/StatisticsBoxes"
 import ProfitChart from "../components/ProfitChart"
 

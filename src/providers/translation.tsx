@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from "react";
+import { PropsWithChildren } from "react";
 import { IntlProvider } from "react-intl";
 import ar from "translations/ar.json";
 import en from "translations/en.json";

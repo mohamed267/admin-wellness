@@ -1,10 +1,5 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Box, Flex, Icon, Text } from '@chakra-ui/react'
+import { Flex, Icon, Text } from '@chakra-ui/react'
 import { Link, useLocation } from 'react-router-dom'
-import Dashboard from 'assets/icons/sidebar/Dashboard'
-import { SideBarItem } from 'types'
-import { activeMenu } from 'utils/activeMenu'
 import Logout from 'assets/icons/sidebar/Logout'
 
 const SidebarLogout = () => {

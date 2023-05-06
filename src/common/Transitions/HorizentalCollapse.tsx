@@ -1,6 +1,5 @@
-import { Button, useDisclosure } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
-import { PropsWithChildren, useState } from 'react'
+import { PropsWithChildren } from 'react'
 
 type HCollapseProps = {
   width: number | string,
