@@ -1,0 +1,20 @@
+{
+    "events": "events",
+    "coupons": "coupons",
+    "discover": "discover",
+    "blog": "blog",
+    "login": "login",
+    "eventTilte": "Event title",
+    "lorem1": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab assumenda optio quia dignissimos veniam non ex exercitationem deleniti explicabo quam? Reiciendis, libero consequatur amet omnis perferendis dolore quibusdam dolores nemo.",
+    "book": "book",
+    "moreInfo": "more information",
+    "overview": "overview",
+    "soldtikets": "Tickets sold",
+    "totalprofit": "Total profit",
+    "newServiceProviders": "New service providers",
+    "newclients": "New clients",
+    "profitschart": "Profits chart",
+    "publishingDate": "Publishing date",
+    "newEvent": "New event",
+    "Search": "Search"
+}
