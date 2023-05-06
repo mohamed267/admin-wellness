@@ -17,7 +17,6 @@ type RtlProps = {
 }
 
 export function RtlProvider({ children }:RtlProps) {
-    const location = useLocation();
 
     const { locale } = useIntl()
 

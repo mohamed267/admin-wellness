@@ -14,7 +14,8 @@ const Price = ({value} : PriceProps) => {
         color="gray.600"
       >
         <FormattedNumber 
-            style="currency"
+            // eslint-disable-next-line react/style-prop-object
+            style='currency'
             currency='SAR'
             value={value}
         />

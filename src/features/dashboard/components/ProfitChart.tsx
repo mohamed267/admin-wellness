@@ -1,11 +1,5 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Flex, Stack, Stat, StatLabel, StatNumber, Text, StatHelpText, StatArrow, Box } from '@chakra-ui/react'
-import { FormattedMessage, FormattedNumber } from 'react-intl'
-import Checkout from 'assets/icons/stats/checkout'
-import Stocks from 'assets/icons/stats/Stocks'
-import ServiceProvider from 'assets/icons/stats/ServiceProvider'
-import Clients from 'assets/icons/stats/Clients'
+import { Stack, Text, Box } from '@chakra-ui/react'
+import { FormattedMessage } from 'react-intl'
 import LineCharts from 'components/charts/LineCharts'
 
 const ProfitChart = () => {

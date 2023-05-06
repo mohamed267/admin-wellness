@@ -1,6 +1,4 @@
-import React, { useEffect  , useState} from 'react'
-import PropTypes from 'prop-types'
-import { Badge, Flex, Icon, Text } from '@chakra-ui/react'
+import { Badge, Flex } from '@chakra-ui/react'
 
 
 

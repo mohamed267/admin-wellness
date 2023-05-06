@@ -1,5 +1,3 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { Flex, Stack, Stat, StatLabel, StatNumber, Text, StatHelpText, StatArrow, Box } from '@chakra-ui/react'
 import { FormattedMessage, FormattedNumber } from 'react-intl'
 import Checkout from 'assets/icons/stats/checkout'
@@ -66,7 +64,10 @@ const StatisticsBoxes = () => {
                 <FormattedMessage id="totalprofit"  />
               </StatLabel>
               <StatNumber color="blue.900"  fontSize="40px" >
-                <FormattedNumber style='currency' currency="USD" notation="compact"  value={2000000} />
+                <FormattedNumber 
+                
+                // eslint-disable-next-line react/style-prop-object
+                style='currency' currency="USD" notation="compact"  value={2000000} />
               </StatNumber>
               <StatHelpText>
                 <StatArrow type='decrease' />

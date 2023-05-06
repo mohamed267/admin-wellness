@@ -111,8 +111,6 @@ const TableComponent = <Entry extends {id : string} >(
   } = table
   initialState.pageSize = 8
 
-  
-    const textColor = useColorModeValue('secondaryGray.900', 'white');
     const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100');
 
 
@@ -190,7 +188,7 @@ const TableComponent = <Entry extends {id : string} >(
                   key={index}
                   cursor="pointer"
                   bg={
-                    index % 2 ==1 ?
+                    index % 2 ===1 ?
                     "gray.400": "white"
                 }
                 >
@@ -210,7 +208,7 @@ const TableComponent = <Entry extends {id : string} >(
                             {...cell.getCellProps()}
                             key={index}
                             border="none"
-                            color={index==0 ?  "gray.800" : "gray.600"}
+                            color={index===0 ?  "gray.800" : "gray.600"}
                            
                           >
                             <Text  

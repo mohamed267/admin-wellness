@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router-dom'
 import Logout from 'assets/icons/sidebar/Logout'
 
 const SidebarLogout = () => {
-    const  location = useLocation()
   return (
     <Link to={"/logout"} >
         <Flex gap="15px"    alignItems="stretch"  >

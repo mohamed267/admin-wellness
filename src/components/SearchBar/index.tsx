@@ -12,7 +12,7 @@ type SearchBarProps = {
 
 const SearchBar = ({ width = "60%" , placeholder="" } : SearchBarProps) => {
     const int1 =  useIntl()
-    const { getButtonProps, isOpen, onOpen: onSearchFocus, onClose: onSearchClose  } = useDisclosure()
+    const { getButtonProps, onOpen: onSearchFocus, onClose: onSearchClose  } = useDisclosure()
     return (
         <HCollapse width={width} hiddenWidth={"100px"}  isOpen={true} >
             <InputGroup
