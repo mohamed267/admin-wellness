@@ -60,7 +60,7 @@ const SidebarNavItem = ({ item } :{ item: SideBarItem }) => {
                             onClick={onToggle}
                         >
                             <svg    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M10.0833 1.9585L5.99999 6.04183L1.91666 1.9585" stroke="#6F7181" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M10.0833 1.9585L5.99999 6.04183L1.91666 1.9585" stroke="#6F7181" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
 
                         </Icon>
@@ -70,7 +70,7 @@ const SidebarNavItem = ({ item } :{ item: SideBarItem }) => {
             <Collapse in={isOpen} >
                 <Stack ps="60px" spacing="2px" py="5px"  >
                     {item?.children?.map((item:any , key: any)=>(
-                        <Link to={item?.href ?? "#" } >
+                        <Link  key={key} to={item?.href ?? "#" } >
                             <Text color={ 
                                 activeMenu(item.activeKey ,location.pathname ) ?
                                 "sidebar.active.text":

@@ -2,12 +2,13 @@
 import { useRoutes } from "react-router-dom";
 import { commonRoutes } from "./common";
 import { protectedRoutes } from "./protected";
+import { authRoutes } from "./auth";
 
 
 
 export const AppRoutes = ()=>{
     
-    const routes = [...protectedRoutes , ...commonRoutes]
+    const routes = [...protectedRoutes  , ...authRoutes]
     
 
   

@@ -1,5 +1,6 @@
 import If from "common/If";
 import { useDirectionContext } from "contexts/directionContext";
+import { useDirection } from "hooks/useDirection";
 import { PropsWithChildren } from "react";
 
 interface Props {
@@ -9,7 +10,7 @@ interface Props {
 }
 
 const Switcher = ({children , Left , Right ,  style ={}}: PropsWithChildren<Props>) => {
-    const { dir } = useDirectionContext()
+    const { dir } = useDirection()
 
 
 
@@ -17,24 +18,24 @@ const Switcher = ({children , Left , Right ,  style ={}}: PropsWithChildren<Prop
         <>
         <If condition={dir==="rtl"}
             otherwise={
-                <Left
+                <Right
                 {...style}
             >
                 {
                     children
                 }
-            </Left>
+            </Right>
             }
         
         >
             
-            <Right
+            <Left
                     {...style}
                 >
                     {
                         children
                     }
-                </Right>
+            </Left>
             
         </If>
         

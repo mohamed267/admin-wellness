@@ -1,3 +1,4 @@
+import { ReactElement } from "react";
 
 export type BaseEntity = {
     id: string;
@@ -10,4 +11,15 @@ export type SideBarItem = {
     icon?: ()=> JSX.Element;
     activeKey:string;
     href?: string;
+}
+
+export type CellProps = {
+    value : string
+}
+
+
+export type TableMenuItem = {
+    title: string, 
+    Icon: ()=> JSX.Element,
+    onClick?: ()=>any 
 }

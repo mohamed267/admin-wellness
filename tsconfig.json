@@ -22,6 +22,10 @@
        "baseUrl": "./src",
     },
     "include": [
+      "src/**/*.ts",
+      "tests/**/*.ts",
+      "src/**/*.tsx",
+      "tests/**/*.tsx",
       "src"
     ]
   }

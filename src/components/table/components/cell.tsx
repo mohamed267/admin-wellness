@@ -12,12 +12,12 @@ const Cell = (
     
   return (
     <Text 
-    // textTransform={"capitalize"}
-    fontSize='sm' 
-    px={2}
->
-    {value}
-</Text>
+        // textTransform={"capitalize"}
+        fontSize='sm' 
+        px={2}
+    >
+        {value}
+    </Text>
   )
 }
 

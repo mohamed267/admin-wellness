@@ -4,11 +4,20 @@ import { Link } from "react-router-dom"
 import { Event } from "../types"
 
 import { eventsColumns } from "../variables/table"
-import { events } from "../__fakedata/event"
 import NewEvent from "assets/icons/event/newEvent"
 import { FormattedMessage } from "react-intl"
+import StartedTable from "components/startedTable/StartedTable"
+import { useEvents } from "../api/getEvents"
+import { useEffect } from "react"
 
 const ListEvents = () => {
+  const { data: events } = useEvents({})
+
+
+  useEffect(()=>{
+    console.log("events  are   = >  ", events)
+  } , [events])
+
   return (
     <Stack py='15px'  spacing="30px" >
         <HStack justifyContent="space-between" >
@@ -36,33 +45,20 @@ const ListEvents = () => {
         </HStack>
           
 
-        <Stack 
-          bg="white"
-          borderRadius="xl"
-          spacing={0}
-        >
+          
+        <TableComponent<Event>
+          name="events"
+          // name="users"
+          // selectRow={navigateOrderDetails}
+          data={events?.events ?? []}
+          tableColumns={eventsColumns}
+          setPageIndex={()=>{}}
+          pageIndex={1}
+          pageCount={10}
+          // searching={setSearch}
+          // detailsIcon={true}
+        /> 
 
-          <HStack
-            px="16px"
-            py="16px"
-            justifyContent="space-between"
-          >
-            <Text fontSize="14px" color="gray.600" > 1 row selected </Text>
-
-          </HStack>
-          <TableComponent<Event>
-            // name="users"
-            // selectRow={navigateOrderDetails}
-            data={events}
-            tableColumns={eventsColumns}
-            setPageIndex={()=>{}}
-            pageIndex={1}
-            pageCount={10}
-            // searching={setSearch}
-            // detailsIcon={true}
-          />
-
-        </Stack>
 
     </Stack>
   )

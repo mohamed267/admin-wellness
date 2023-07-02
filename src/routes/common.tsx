@@ -14,7 +14,5 @@ const App = () => {
 
 
 export const commonRoutes = [{
-    path :  "/auth" , 
-    element : <App /> , 
-    children : []
+   
 }]

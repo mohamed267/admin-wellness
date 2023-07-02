@@ -4,10 +4,9 @@ import { ChakraProvider } from "@chakra-ui/react"
 import theme from "lib/theme"
 import { RtlProvider } from "./rtl"
 import TranslationProvider from "./translation"
-
-
-
-
+// import { QueryClientProvider } from "react-query"
+import { queryClient } from "lib/react-query"
+import { QueryClientProvider } from "@tanstack/react-query"
 
 
 
@@ -27,14 +26,18 @@ export const AppProvider=(
             theme={theme}
         >
             <Suspense fallback={<div>Loading...</div>}>
-                <TranslationProvider locale="en" >
-                    <Router>
-                        <RtlProvider>
-                            {children}
-                        </RtlProvider>
-                    </Router>
+                <QueryClientProvider
+                    client={queryClient}
+                >
+                    <TranslationProvider locale="en" >
+                        <Router>
+                            <RtlProvider>
+                                {children}
+                            </RtlProvider>
+                        </Router>
 
-                </TranslationProvider>
+                    </TranslationProvider>
+                </QueryClientProvider>
             
             </Suspense>
         </ChakraProvider>

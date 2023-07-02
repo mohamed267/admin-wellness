@@ -19,6 +19,15 @@ export const globalStyles = {
             800: '#003D37',
             900: '#001412',
         },
+
+        checkbox:{
+            border: {
+                gray: "#C4C8D4"
+            },
+            bg: {
+                gray: "#F4F5F7"
+            }
+        },
         
         sidebar:{
             active:{
@@ -42,10 +51,10 @@ export const globalStyles = {
         },
         gray : {
             50: '#FCFCFC',
-            100: '#FAFCFE',
+            100: '#FAFAFB',
             200: '#efefef', 
-            300: '#C8C6C6',
-            400: '#F1F1F1',
+            300: '#F1F1F1',
+            400: '#C8C6C6',
             500: "#707070",
             600: '#8992A9',
             700: '#2e3237',
@@ -57,6 +66,7 @@ export const globalStyles = {
             900: "#04103B",
         },
         black: {
+            200: "#C4C8D4",
             500: "#0A0A0A",
         },
         youtube: "#CD201F" ,

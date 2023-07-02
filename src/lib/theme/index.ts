@@ -4,6 +4,7 @@ import { CardComponent } from "./additions/card";
 import { inputStyles } from "./components/input";
 import { buttonStyles } from "./components/button";
 import { StepsTheme as Steps } from 'chakra-ui-steps';
+import { CheckBoxComponent } from "./components/checkbox";
 
 // import { CardComponent } from './additions/card';
 // import { buttonStyles } from './components/button';
@@ -27,7 +28,8 @@ export default extendTheme(
     globalStyles,
     CardComponent,
     inputStyles,
-    buttonStyles
+    buttonStyles,
+    CheckBoxComponent
 
 );
 

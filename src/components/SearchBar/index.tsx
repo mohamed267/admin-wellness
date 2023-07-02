@@ -20,14 +20,14 @@ const SearchBar = ({ width = "60%" , placeholder="" } : SearchBarProps) => {
                 borderRadius="3xl"
                 overflow={"hidden"}
                 variant="search"
-                h='50px'
+                h='45px'
                 position={"relative"}
                 boxShadow="-1px 5px 11px 1px #ddd9d9"
             >
                 
                 <Switcher 
-                    Left={InputRightElement} 
-                    Right={InputLeftElement}
+                    Left={InputLeftElement} 
+                    Right={InputRightElement}
                     style={{
                         w: "50px",
                         h: "100%",
@@ -38,7 +38,7 @@ const SearchBar = ({ width = "60%" , placeholder="" } : SearchBarProps) => {
                         variant={"whiteFill"}
                         icon={<BsSearch />}
                         borderRadius="xl"
-                        fontSize={"xl"}
+                        fontSize={"lg"}
                         h="100%"
                         w="100%"
                         {...getButtonProps()}

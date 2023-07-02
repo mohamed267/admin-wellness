@@ -5,8 +5,19 @@ import { User } from "../types"
 
 import { users } from "../__fakedata/user"
 import { usersColumns } from "../variables/table"
+import { useUsers } from "../api/getUsers"
+import { useEffect } from "react"
 
 const ListUsers = () => {
+  const { data: usersData } =  useUsers({});
+
+  useEffect(()=>{
+    console.log("user dat => ", usersData)
+  } , [usersData])
+
+
+
+
   return (
     <Stack py='15px' >
         <Breadcrumb>
@@ -30,9 +41,9 @@ const ListUsers = () => {
             <Text fontSize="14px" color="gray.600" > 1 row selected </Text>
           </HStack>
           <TableComponent<User>
-            // name="users"
+            name="users"
             // selectRow={navigateOrderDetails}
-            data={users}
+            data={usersData?.users ?? []}
             tableColumns={usersColumns}
             setPageIndex={()=>{}}
             pageIndex={1}

@@ -1,4 +1,5 @@
 
+import { ClientsRoutes } from "features/clients/routes";
 import { DashboardRoutes } from "features/dashboard/routes";
 import { EventsRoutes } from "features/events/routes";
 import { UsersRoutes } from "features/users/routes";
@@ -23,6 +24,10 @@ export const protectedRoutes = [{
         {
             path : "/users/*",
             element: <UsersRoutes />
+        }, 
+        {
+            path : "/users/clients/*",
+            element: <ClientsRoutes />
         }, 
         {
             path : "/events/*",

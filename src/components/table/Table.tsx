@@ -1,5 +1,6 @@
 import {
-  Flex, Stack,
+  Box,
+  Flex, HStack, Stack,
   Text, Thead,
   useColorModeValue
 } from "@chakra-ui/react"
@@ -15,7 +16,8 @@ import {
   useTable,
   useSortBy,
   usePagination,
-  useGlobalFilter
+  useGlobalFilter,
+  useRowSelect
 } from "react-table"
   
 import { useMemo } from "react"
@@ -37,6 +39,9 @@ import Sort from "assets/icons/table/Sort"
 import UserStatus from "features/users/components/UserStatus"
 import Price from "./components/price"
 import EventStatus from "features/events/components/EventStatus"
+import TableSelctCheckbox from "components/startedTable/TableSelctCheckbox"
+import TableSelectCheckBox from "./TableSelectCheckBox"
+import If from "common/If"
   
 
 
@@ -66,6 +71,7 @@ type ColumnType  =  {
 type TableComponentProps<Entry>={
   data : Entry[] ,
   tableColumns : ColumnType[]  , 
+  name: string,
   setPageIndex : any ,
   pageIndex : number , 
   pageCount : number 
@@ -75,6 +81,7 @@ type TableComponentProps<Entry>={
 const TableComponent = <Entry extends {id : string} >(
   { 
     data ,
+    name,
     tableColumns , 
     setPageIndex,
     pageIndex ,
@@ -87,13 +94,41 @@ const TableComponent = <Entry extends {id : string} >(
 
   const columns:any = useMemo(()=>tableColumns , [tableColumns])
   const table:any =  useTable({
-    columns ,
-    data 
+      columns ,
+      data 
     },
     // useFilters,
-    useGlobalFilter,
-    useSortBy,
-    usePagination
+    // useGlobalFilter,
+    // useSortBy,
+    // usePagination,
+    useRowSelect,
+    hooks => {
+      hooks?.visibleColumns?.push((columns:any) =>{
+        console.log("columns  => ", columns)
+        
+        return([
+          // Let's make a column for selection
+          {
+            id: 'selection',
+            // The header can use the table's getToggleAllRowsSelectedProps method
+            // to render a checkbox
+            Header: ({ getToggleAllRowsSelectedProps }:any) => (
+              <div>
+                <TableSelectCheckBox {...getToggleAllRowsSelectedProps()} />
+              </div>
+            ),
+            // The cell can use the individual row's getToggleRowSelectedProps method
+            // to the render a checkbox
+            Cell: ({ row }:any) => (
+              <div>
+                <TableSelectCheckBox {...row.getToggleRowSelectedProps()} />
+              </div>
+            ),
+          },
+          ...columns,
+        ])
+      })
+    }
   
   )
 
@@ -104,6 +139,7 @@ const TableComponent = <Entry extends {id : string} >(
     getTableBodyProps,
     headerGroups,
     page,
+    rows,
 
     prepareRow , 
     initialState
@@ -111,147 +147,161 @@ const TableComponent = <Entry extends {id : string} >(
   } = table
   initialState.pageSize = 8
 
-    const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100');
+  const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100');
 
 
   return (
-    <Stack>
-      <Table    {...getTableProps()}>
-        <Thead
+    <Stack  gap="30px" bg="transparent" >
+      <Box bg="white" borderRadius="xl" overflow="hidden" >
+        <HStack
+          px="16px"
+          py="16px"
+          justifyContent="space-between"
         >
-          {
-              headerGroups.map(((headerGroup:any , index:any)=>{
+          <Text fontSize="14px" color="gray.600" > 1 row selected </Text>
+
+        </HStack>
+        <Table     {...getTableProps()}>
+          <Thead
+          >
+            {
+                headerGroups.map(((headerGroup:any , index:any)=>{
+                  return(
+                    <Tr
+                      key={index}
+                      {...headerGroup.getHeaderGroupProps()}
+                    >
+                      {
+                        headerGroup.headers.map((column:any,  index:any)=>{
+                          console.log("header column  => ", column)
+
+                          return(
+                            <Th
+                              py='15px'
+                              {
+                                ...column.getHeaderProps(
+                                  // column.getSortByToggleProps()
+                                )
+                              }
+                              key={index}
+                              pe="10px"
+                              borderColor={borderColor}
+                              bg="gray.100"
+                            >
+                              <Flex
+                                alignItems="center"
+                                gap="10px"
+                                fontSize={{ sm: '10px', lg: "14px" }}
+                                color='gray.600'
+                                textTransform={"capitalize"}
+                              //   textTransform={""}
+                              >
+                                <If condition={column.id !=="selection"} >
+                                  {
+                                    column.render("Header") &&
+                                    <Text  fontSize="15px" lineHeight="17px" fontWeight="500" >
+                                        <FormattedMessage  
+                                          id={column.render("Header")}
+                                        />
+                                    </Text> 
+                                  }
+
+                                </If>
+
+                                <If condition={column.id === "selection"} >
+                                  {column.render("Header")}
+                                </If>
+                      
+                                <Sort />
+
+                              </Flex>
+
+                            </Th>
+
+                          )
+
+                        })
+                      }
+                      
+
+                    </Tr>
+
+                  )
+
+                }))
+              }
+
+          </Thead>
+
+          <Tbody  {...getTableBodyProps()}>
+            {
+              rows.map((row:any , index:any)=>{
+                prepareRow(row)
                 return(
                   <Tr
+                    {...row.getRowProps()}
                     key={index}
-                    {...headerGroup.getHeaderGroupProps()}
+                    cursor="pointer"
+                    py="0"
+                    bg={
+                      index % 2 ===1 ?
+                      "gray.100": "white"
+                  }
                   >
-                    {
-                      headerGroup.headers.map((column:any,  index:any)=>{
-                        return(
-                          <Th
-                            py='15px'
-                            {
-                              ...column.getHeaderProps(
-                                column.getSortByToggleProps()
-                              )
-                            }
-                            key={index}
-                            pe="10px"
-                            borderColor={borderColor}
-                            bg="gray.400"
-                          >
-                            <Flex
-                              alignItems="center"
-                              gap="10px"
-                              fontSize={{ sm: '10px', lg: "14px" }}
-                              color='gray.600'
-                              textTransform={"capitalize"}
-                            //   textTransform={""}
+                      {
+
+                        row.cells.map((cell:any , index:any)=>{
+
+                          // const data:any = 
+                          // console.log("our dara ", cell)
+                          
+                          // const column = columns[index]
+                          // const componentType  =  (column && column.Type) || "cell"
+
+                          // let Component = componentType ? components[componentType] : null
+                          
+                          return(
+                            <Td
+                              {...cell.getCellProps()}
+                              key={index}
+                              border="none"
+                              color={index===0 ?  "gray.800" : "gray.600"}
+                            
                             >
-                              {
-                                column.render("Header") &&
-                                <Text>
-                                    <FormattedMessage  
-                                      id={column.render("Header")}
-                                    />
-                                </Text> 
-                              }
-                              <Sort />
+                              {cell.render("Cell")}
+                              {/* <Text  
+                                fontSize='sm' 
+                                fontWeight='700'
+                              >
+                                {
+                                  <Component 
+                                  value={cell.value}
+                                  />
+                                }
+                              </Text> */}
+                              
+                            </Td>
+                          )
+                        })
+                      }
 
-                            </Flex>
-
-                          </Th>
-
-                        )
-
-                      })
-                    }
                     
 
-                  </Tr>
 
+                    
+                  </Tr>                  
                 )
-
-              }))
+              })
             }
 
-        </Thead>
+          </Tbody>
 
-        <Tbody  {...getTableBodyProps()}>
-          {
-            page.map((row:any , index:any)=>{
-              prepareRow(row)
-              return(
-                <Tr
-                  {...row.getRowProps()}
-                  key={index}
-                  cursor="pointer"
-                  bg={
-                    index % 2 ===1 ?
-                    "gray.400": "white"
-                }
-                >
-                    {
-
-                      row.cells.map((cell:any , index:any)=>{
-                        // const data:any = 
-                        // console.log("our dara ", cell)
-                        
-                        const column = columns[index]
-                        const componentType  =  (column && column.Type) || "cell"
-
-                        let Component = componentType ? components[componentType] : null
-                        
-                        return(
-                          <Td
-                            {...cell.getCellProps()}
-                            key={index}
-                            border="none"
-                            color={index===0 ?  "gray.800" : "gray.600"}
-                           
-                          >
-                            <Text  
-                              fontSize='sm' 
-                              fontWeight='700'
-                            >
-                              {
-                                <Component 
-                                value={cell.value}
-                                />
-                              }
-                            </Text>
-                          </Td>
-                        )
-                      })
-                    }
-
-                  
+          
 
 
-                  
-                </Tr>                  
-              )
-            })
-          }
+        </Table>
+      </Box>
 
-        </Tbody>
-
-        {/* <Flex>
-        <Button
-          onClick={previousPage}
-        >
-          previous
-        </Button>
-        <Button
-          onClick={nextPage}
-        >
-          next
-        </Button>
-        </Flex> */}
-
-
-      </Table>
       <Flex
             p={4}
             justifyContent="end"
@@ -263,8 +313,7 @@ const TableComponent = <Entry extends {id : string} >(
               setPage={setPageIndex}
               
             />
-    </Flex>
-
+      </Flex>
     </Stack>
 
      

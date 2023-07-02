@@ -15,10 +15,10 @@ export const inputStyles = {
 					field: {
 						fontWeight: '500',
 						color: mode('black.700', 'white')(props),
-						bg: mode('white', 'white')(props),
+						bg: mode('primary.bg.100', 'primary.bg.100')(props),
 						border: '1px solid',
 						borderColor: mode('gray.500', 'rgba(135, 140, 189, 0.3)')(props),
-						borderRadius: 'md',
+						borderRadius: '2xl',
 						_placeholder: { color: 'secondaryGray.600', fontWeight: '400' },
 						_hover: {
 							borderColor: mode('primary.500', 'primary.500')(props),
@@ -37,13 +37,15 @@ export const inputStyles = {
 					field: {
 						fontWeight: '500',
 						color: mode('black.900', 'white')(props),
-						bg: mode('transparent', 'transparent')(props),
+						bg: mode('white', 'white')(props),
 						border: '1px solid',
-						borderColor: mode('gray.500', 'rgba(135, 140, 189, 0.3)')(props),
+						borderColor: mode('gray.300', 'rgba(135, 140, 189, 0.3)')(props),
 						borderRadius: '16px',
+						boxShadow:"xs" , 
 						_placeholder: { color: 'gray.600', fontWeight: '400' } , 
 						_hover:{
 							borderColor: mode('primary.500', 'rgba(135, 140, 189, 0.3)')(props),
+							boxShadow:"sm" ,
 						
 						}
 					}

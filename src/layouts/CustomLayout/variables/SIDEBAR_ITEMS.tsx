@@ -20,7 +20,7 @@ export const SIDEBAR_ITEMS: Array<SideBarItem> = [
     {
         label: 'users',
         icon : User  ,
-        href: "/users", 
+        href: "#", 
         activeKey: "/users",
         children:[
           {
