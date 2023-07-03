@@ -9,7 +9,8 @@ import {AiOutlinePlus} from "react-icons/ai"
 import {RiDeleteBin7Fill } from "react-icons/ri"
 import { FormattedMessage } from 'react-intl'
 import PhotoUploadBox from './PhotoUploadBox'
-import ImageUploadIcon from 'assets/icons/uploads/imageUploadIcon'
+import ImageUploadIcon from 'assets/icons/uploads/videoUploadIcon'
+import VideoUploadBox from './VideoUploadBox'
 
 type InputFieldProps = FieldWrapperPassThroughProps  & {
     registration : Partial<UseFormRegisterReturn> , 
@@ -17,11 +18,11 @@ type InputFieldProps = FieldWrapperPassThroughProps  & {
     setValue?: any,
     defaultValue?: any,
     name?: string,
-    imageType: string
+    videoType: string
 }
 
 
-const MultipleImageField = (
+const MultipleVideoField = (
    {
     registration , 
     error , 
@@ -30,13 +31,13 @@ const MultipleImageField = (
     setValue=()=>{},
     defaultValue=[],
     name="media",
-    imageType
+    videoType
    }:InputFieldProps
 
 ) => {
     const [ primaryColor , black200 ] =  useToken( "colors"  , ["primary.500" , "black.200" ])
     const addRef = useRef<any>(null);
-    const [images , setImages] =useState<any>(defaultValue)
+    const [videos , setImages] =useState<any>(defaultValue)
 
     const [files, setFiles] = useState<any>([]);
 
@@ -47,17 +48,17 @@ const MultipleImageField = (
     }; 
     const handleImageUploaded = (url: string) =>{
         setImages([
-            ...images , 
-            {url , type: "image"}
+            ...videos , 
+            {url , type: "video"}
         ])
     }
     const deleteImage = (index:any) =>{
-        setImages(images.filter((image:any , key:any)=>(index!==key)))
+        setImages(videos.filter((video:any , key:any)=>(index!==key)))
     }
 
     useEffect(()=>{
-        setValue(name, images)
-    } , [images])
+        setValue(name, videos)
+    } , [videos, name])
 
 
 
@@ -73,15 +74,15 @@ const MultipleImageField = (
                 flexWrap="wrap"
                 >
                 {files.map((file: any, key: any) => (
-                    <PhotoUploadBox 
+                    <VideoUploadBox 
                         file={file} 
                         key={key} 
-                        imageType={imageType}
+                        videoType={videoType}
                         uploaded={handleImageUploaded}
                     />
                 ))}
                 {
-                    images.map((image : any , key:any)=>{
+                    videos.map((video : any , key:any)=>{
                         return(
                             <Center
                                 key={key}
@@ -93,7 +94,7 @@ const MultipleImageField = (
                                 
                             >
                                 <Image 
-                                    src={image?.url?? null}
+                                    src={video?.url?? null}
                                     h="100%"
                                     w="100%"
                                     objectFit={"cover"}
@@ -142,7 +143,7 @@ const MultipleImageField = (
                         ref={addRef}
                     />
                         <Stack alignItems="center" spacing="5" >
-                            <Icon  fill="none"   width="53px" height="53px"  viewBox='0 0 53 53' >
+                            <Icon  fill="none"  stroke="black"  width="53px" height="53px"  viewBox='0 0 53 53' >
                                 <ImageUploadIcon />
                             </Icon>
 
@@ -155,4 +156,4 @@ const MultipleImageField = (
 }
 
 
-export default MultipleImageField
+export default MultipleVideoField

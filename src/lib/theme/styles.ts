@@ -121,6 +121,7 @@ export const globalStyles = {
 	},
 	styles: {
 		global: (props: any) => ({
+            
 			body: {
 				overflowX: 'hidden',
                 bg: mode('primary.bg.100', 'dark.900')(props),

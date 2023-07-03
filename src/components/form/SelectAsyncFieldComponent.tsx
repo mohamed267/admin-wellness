@@ -64,7 +64,7 @@ const SelectAsyncFieldComponent = ({
         defaultOptions
         loadOptions={loadOptionsLauncher}
         focusBorderColor="primary.500"
-        selectedOptionColor="primary"
+        selectedOptionColorScheme="primary"
         options={[]}
         defaultValue={defaultValue}
         getOptionValue={(cell: any) => cell[optionValue]}

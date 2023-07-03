@@ -1,13 +1,15 @@
-import React, { PropsWithChildren } from 'react'
+import React, { PropsWithChildren, lazy } from 'react'
 import PropTypes from 'prop-types'
 import FieldWrapper, { FieldWrapperPassThroughProps } from './FieldWrapper'
-import { Box, Icon, Input, InputGroup, InputLeftAddon, InputLeftElement, InputRightAddon, InputRightElement, useDisclosure } from '@chakra-ui/react'
+import { Box} from '@chakra-ui/react'
 import { FiEye } from "react-icons/fi"
 import {UseFormRegisterReturn} from "react-hook-form"
 import If from 'common/If'
 import { useIntl } from 'react-intl'
-import Switcher from 'common/Switcher'
 import Editor from "components/Editor/Editor"
+
+// // import ReactScrollbar from "react-scrollbar"
+// const ScrollArea = lazy(() => import('react-scrollbar'));
 
 
 type TextEditorfieldProps = FieldWrapperPassThroughProps  & {
@@ -37,17 +39,22 @@ const TextEditorfield = (
    }:PropsWithChildren<TextEditorfieldProps>
 
 ) => {
-  const {isOpen: isShowPasswrd ,onToggle: OnToogleShowPassword  } =  useDisclosure()
-  const int1 =  useIntl()
   return (
     <FieldWrapper
       error={error}
       label={label}
     >
-       <Box   border="1px solid" borderColor="gray.300"   bg="white"  {...rest} borderRadius="30px" px='30px' py="10px" >
-
-          <Editor data={undefined} onChange={()=>{return 0}} holder="editorjs-container" />
-
+       <Box   border="1px solid" borderColor="gray.300"   bg="white"  overflowY="scroll" {...rest} borderRadius="30px" px='30px' py="10px" >
+          {/* <ReactScrollbar 
+            speed={0.8}
+            horizontal={false}
+            style={{
+                height:"100%",
+            }}
+          > */}
+            <Editor data={undefined} onChange={()=>{return 0}} holder="editorjs-container" />
+          {/* </ReactScrollbar> */}
+          
        </Box>
       
 

@@ -17,5 +17,11 @@
     "publishingDate": "Publishing date",
     "newEvent": "New event",
     "Search": "Search",
-    "inscriptiondate": "Subscription date"
+    "inscriptiondate": "Subscription date",
+    "category": "category",
+    "city": "city",
+    "price": "price",
+    "images": "images",
+    "videos": "videos",
+    "add": "add"
 }

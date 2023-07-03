@@ -50,7 +50,6 @@ const EventMenuCell = ({value}: any) => {
     
     return (
         <>
-            {value}
             <Popover>
                 <PopoverTrigger>
                     <Icon fill="primary.500"  viewBox="0 0 4 18"  >

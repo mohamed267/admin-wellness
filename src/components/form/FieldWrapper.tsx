@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 import PropTypes from 'prop-types'
-import { Icon, Flex, FormControl, FormErrorMessage, FormLabel, HStack, Input, ListItem, Text, UnorderedList, useColorModeValue, Collapse } from '@chakra-ui/react'
+import { Icon, Flex, FormControl, FormErrorMessage, FormLabel, HStack, Input,Collapse ,  ListItem, Text, UnorderedList, useColorModeValue } from '@chakra-ui/react'
 import {FieldError} from "react-hook-form"
 
 import { AiOutlineWarning } from "react-icons/ai"
@@ -54,7 +54,13 @@ const FieldWrapper = (
                 
                    
                 <Flex>
-                    <FormattedMessage id={label} />
+                    <Text
+                        _firstLetter={{
+                           textTransform: "capitalize"
+                        }}
+                    >
+                        <FormattedMessage id={label} />
+                    </Text>
                     {required  && <Text color={brandStars}>*</Text>}
                 </Flex>
                 
