@@ -6,7 +6,11 @@ export type  Event ={
     category: string,
     price: number,
     // score: number,
-    status: "pending" | "active"
+    status: "pending" | "active",
+    consultData: {
+        id: string, 
+        eventTitle: string
+    }
 }
 
 export type  EventCategory = {
@@ -22,5 +26,24 @@ export type  EventResponse ={
     price: number,
     // score: number,
     status: "pending" | "active"
+}
+
+
+///coupon 
+
+
+export type CouponResponse = {
+    id: string, 
+    percentage: number,
+    promoCode: string,
+    eventId: string
+}
+
+
+export type Coupon = {
+    id: string, 
+    percentage: number,
+    promoCode: string,
+    eventId: string
 }
 

@@ -25,6 +25,7 @@ const NewEvent = () => {
 
       {/* form event creation  */}
       <EventForm />
+      
 
     </Stack>
   )

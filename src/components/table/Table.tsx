@@ -22,7 +22,8 @@ import {
   
 import { useMemo } from "react"
   
-  
+
+// import Pagination from '@mui/material/Pagination';
 import { Table, Tbody, Td, Th, Tr } from "@chakra-ui/react"
 import Status from "./components/status"
 import Image from "./components/image"
@@ -74,7 +75,8 @@ type TableComponentProps<Entry>={
   name: string,
   setPageIndex : any ,
   pageIndex : number , 
-  pageCount : number 
+  pageCount : number ,
+  hideSelection?: boolean
 
 }
   
@@ -85,7 +87,8 @@ const TableComponent = <Entry extends {id : string} >(
     tableColumns , 
     setPageIndex,
     pageIndex ,
-    pageCount
+    pageCount,
+    hideSelection=false
   }:
   TableComponentProps<Entry>
 
@@ -108,7 +111,7 @@ const TableComponent = <Entry extends {id : string} >(
         
         return([
           // Let's make a column for selection
-          {
+          ...(hideSelection  ? [] :  [{
             id: 'selection',
             // The header can use the table's getToggleAllRowsSelectedProps method
             // to render a checkbox
@@ -124,7 +127,7 @@ const TableComponent = <Entry extends {id : string} >(
                 <TableSelectCheckBox {...row.getToggleRowSelectedProps()} />
               </div>
             ),
-          },
+          }]),
           ...columns,
         ])
       })
@@ -312,7 +315,7 @@ const TableComponent = <Entry extends {id : string} >(
               pages={pageCount}
               setPage={setPageIndex}
               
-            />
+            /> 
       </Flex>
     </Stack>
 

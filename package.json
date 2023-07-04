@@ -8,8 +8,8 @@
     "@editorjs/editorjs": "^2.27.2",
     "@editorjs/header": "^2.7.0",
     "@editorjs/paragraph": "^2.9.0",
-    "@emotion/react": "^11.10.8",
-    "@emotion/styled": "^11.10.8",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@faker-js/faker": "^7.6.0",
     "@hookform/resolvers": "^3.1.0",
     "@tanstack/react-query": "^4.29.19",
@@ -26,7 +26,9 @@
     "path": "^0.12.7",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.0",
+    "react-calendar": "^4.3.0",
     "react-country-flag": "^3.1.0",
+    "react-date-range": "^1.4.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.9",
     "react-icons": "^4.8.0",
@@ -76,6 +78,7 @@
   "devDependencies": {
     "@types/editorjs__header": "^2.6.0",
     "@types/react": "^18.2.5",
+    "@types/react-date-range": "^1.4.4",
     "@types/react-dom": "^18.2.4",
     "@types/react-scrollbar": "^0.5.3",
     "@types/react-table": "^7.7.14"

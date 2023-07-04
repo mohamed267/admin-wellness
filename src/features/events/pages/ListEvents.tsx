@@ -1,4 +1,4 @@
-import { Breadcrumb, BreadcrumbItem, HStack, Icon, Stack, Text } from "@chakra-ui/react"
+import { Breadcrumb, BreadcrumbItem, Button, HStack, Icon, Stack, Text } from "@chakra-ui/react"
 import TableComponent from "components/table/Table"
 import { Link } from "react-router-dom"
 import { Event } from "../types"
@@ -8,18 +8,25 @@ import NewEvent from "assets/icons/event/newEvent"
 import { FormattedMessage } from "react-intl"
 import StartedTable from "components/startedTable/StartedTable"
 import { useEvents } from "../api/getEvents"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import AddCategoryIcon from "assets/icons/category/AddCategoryIcon"
+import DefaultButton from "common/Button/DefaultButton"
+import AddCityIcon from "assets/icons/city/AddCityIcon"
 
 const ListEvents = () => {
+  const  [ pageIndex, setPageIndex ] = useState(1)
   const { data: events } = useEvents({})
 
-
   useEffect(()=>{
-    console.log("events  are   = >  ", events)
+      if(events?.meta){
+        setPageIndex(events.meta.currentPage)
+      }
   } , [events])
 
+
+
   return (
-    <Stack py='15px'  spacing="30px" >
+    <Stack py='15px'  spacing="10px" >
         <HStack justifyContent="space-between" >
           <Breadcrumb>
             <BreadcrumbItem color="primary.500" >
@@ -30,21 +37,90 @@ const ListEvents = () => {
           </Breadcrumb>
           <HStack>
             <Link to="/events/new">
-                  <HStack py="5px" bg="white" color="primary.500" p="2px" px="15px" borderRadius="3xl"  >
-                    <Icon viewBox="0 0 17 15" width="17" height="15" >
+                <Button 
+                  color="primary.500"
+                  borderRadius="31px"
+                  fontSize="14px" 
+                  py="5px" 
+                  bg="white"
+                  fontWeight="500"
+                  h="31px"
+                  iconSpacing="5px"
+                  leftIcon={
+                    <Icon viewBox="0 0 17 15" width="17" height="15" fill="primary.500" >
                       <NewEvent />
-
                     </Icon>
-                    <Text color="12px"  >
+                  }
+                >
+                   <Text           
+                      _firstLetter={
+                        {
+                          textTransform: "capitalize"
+                        }
+                      }
+                      fontSize="14px"
+                    >
                       <FormattedMessage  id="newEvent" />
                     </Text>
-                  </HStack>
-              </Link>
+                </Button>
+            </Link>
+            <Link to="/events/category/new">
+                <Button 
+                  color="primary.500"
+                  borderRadius="31px"
+                  fontSize="14px" 
+                  py="5px" 
+                  bg="white"
+                  fontWeight="500"
+                  h="31px"
+                  iconSpacing="5px"
+                  leftIcon={<Icon viewBox="0 0 17 15" width="17" height="15" fill="primary.500" >
+                  <AddCategoryIcon />
+                </Icon>}
+                >
+                  <Text               
+                    _firstLetter={
+                      {
+                        textTransform: "capitalize"
+                      }
+                    }
+                    fontSize="14px"
+                  >
+                    <FormattedMessage  id="newCategory" />
+                  </Text>
+                </Button>
+            </Link>
+            <Link to="/events/city/new">
+                <Button 
+                  color="primary.500"
+                  borderRadius="31px"
+                  fontSize="14px" 
+                  py="5px" 
+                  bg="white"
+                  fontWeight="500"
+                  h="31px"
+                  iconSpacing="5px"
+                  leftIcon={<Icon viewBox="0 0 17 15" width="17" height="15" fill="primary.500" >
+                  <AddCityIcon />
+                </Icon>}
+                >
+                  <Text               
+                    _firstLetter={
+                      {
+                        textTransform: "capitalize"
+                      }
+                    }
+                    fontSize="14px"
+                  >
+                    <FormattedMessage  id="newCity" />
+                  </Text>
+                </Button>
+            </Link>
 
           </HStack>
         </HStack>
-          
 
+       
           
         <TableComponent<Event>
           name="events"
@@ -52,9 +128,10 @@ const ListEvents = () => {
           // selectRow={navigateOrderDetails}
           data={events?.events ?? []}
           tableColumns={eventsColumns}
-          setPageIndex={()=>{}}
-          pageIndex={1}
-          pageCount={10}
+          setPageIndex={setPageIndex}
+          pageIndex={pageIndex}
+          pageCount={events?.meta?.totalPages ?? 1}
+          // 
           // searching={setSearch}
           // detailsIcon={true}
         /> 

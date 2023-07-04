@@ -8,6 +8,8 @@ import Price from "components/table/components/price";
 import Status from "components/table/components/status";
 import EventNameCell from "../components/table/EventNameCell";
 import EventMenuCell from "../components/table/EventMenuCell";
+import CouponReductionCell from "../components/table/coupon/CouponReduction";
+import CouponIdCell from "../components/table/coupon/CouponIdCell";
 
 // orderNumber: number
 export const eventsColumns = [
@@ -40,8 +42,32 @@ export const eventsColumns = [
     },
     {
         Header: "",
-        accessor: "id",
+        accessor: "consultData",
         Cell: EventMenuCell
     }
+
+]
+
+
+//coupons column 
+
+
+export const couponsColumns = [
+    {
+        Header :"couponId",
+        accessor : "id",
+        Cell: CouponIdCell
+    } ,
+    {
+        Header :"promoCode",
+        accessor : "promoCode",
+        Cell: Cell
+    },
+    {
+        Header :"reduction",
+        accessor : "percentage",
+        Cell: CouponReductionCell 
+    }
+   
 
 ]

@@ -21,5 +21,7 @@ export type CellProps = {
 export type TableMenuItem = {
     title: string, 
     Icon: ()=> JSX.Element,
-    onClick?: ()=>any 
+    onClick?: ()=>any ,
+    link?: string,
+    state?: any
 }

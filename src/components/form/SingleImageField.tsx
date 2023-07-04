@@ -10,6 +10,7 @@ import {RiDeleteBin7Fill } from "react-icons/ri"
 import { FormattedMessage } from 'react-intl'
 import PhotoUploadBox from './PhotoUploadBox'
 import If from 'common/If'
+import ImageUploadIcon from 'assets/icons/uploads/imageUploadIcon'
 
 type InputFieldProps = FieldWrapperPassThroughProps  & {
     registration : Partial<UseFormRegisterReturn> , 
@@ -32,7 +33,7 @@ const SingleImageField = (
    }:InputFieldProps
 
 ) => {
-    const [ primaryColor ] =  useToken( "colors"  , ["primary.500" ])
+    const [ primaryColor , black200 ] =  useToken( "colors"  , ["primary.500" , "black.200" ])
     const addRef = useRef<any>(null);
     const [image , setImage] =useState<any>(null)
 
@@ -62,7 +63,6 @@ const SingleImageField = (
             label={label}
         >
             <Flex
-                py={5}
                 columnGap={{base : 2 , lg : 10}}
                 rowGap={{base : 5 , lg : 30}}
                 flexWrap="wrap"
@@ -77,8 +77,8 @@ const SingleImageField = (
 
                     <If condition={image} >
                         <Center
-                            w={{base : 50 , lg : 180}}
-                            h={{base : 50 , lg : 180}}
+                            w={{base : 50 , lg : 150}}
+                            h={{base : 50 , lg : 130}}
                             cursor="pointer"
                             borderRadius="3xl"
                             position={"relative"}
@@ -109,12 +109,12 @@ const SingleImageField = (
 
                     <If condition={!image} >
                         <Center
-                            border={{base : "none" , lg :"2px solid"}}
-                            borderColor={`${primaryColor} !important`}
-                            // borderColor="primary.500"
-                            w={{base : 50 , lg : 180}}
-                            h={{base : 50 , lg : 180}}
-                            borderRadius="3xl"
+                            border="2px solid"
+                            borderColor={`${black200} !important`}
+                            w={{base : 120 , lg : 150}}
+                            h={{base : 120 , lg : 130}}
+                            bg="white"
+                            borderRadius="xl"
                             cursor={"pointer"}
                             position="relative"
                         >
@@ -131,12 +131,9 @@ const SingleImageField = (
                                 ref={addRef}
                             />
                                 <Stack alignItems="center" spacing="5" >
-                                    <Icon fontSize={"3xl"} color="primary.500" >
-                                        <AiOutlinePlus />
+                                    <Icon  fill="none"   width="53px" height="53px"  viewBox='0 0 53 53' >
+                                        <ImageUploadIcon />
                                     </Icon>
-                                    <Text color="primary.500" >
-                                        <FormattedMessage id="addPhoto" />
-                                    </Text>
 
                                 </Stack>
                         </Center>

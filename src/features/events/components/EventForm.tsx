@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { z } from 'zod';
 import { Button, Flex, HStack, Stack, Text } from '@chakra-ui/react';
@@ -13,32 +13,68 @@ import MultipleImageField from 'components/form/MultipleImageField';
 import { Media } from 'features/global';
 import MultipleVideoField from 'components/form/MultipleVideoField';
 import { FormattedMessage } from 'react-intl';
+import CalendarComponent from 'components/calendar/Calendar';
+import CalandarRangeField from 'components/form/CalandarRangeField';
+
+
+import  { useCreateEvent } from "../api/createEvent"
+import { useNavigate } from 'react-router-dom';
+
 
 const schemaEvent = z.object({
     title: z.any(),
+    maxNbPlaces: z.string(),
     description: z.any(),
-    category: z.string(),
-    town: z.string(),
+    category: z.any(),
+    town: z.any(),
     price: z.string(),
     images: z.any() ,
     videos: z.any(),
+    rangeBooking: z.any()
 });
 
 type IEventForm  = {
     title: string,
+    maxNbPlaces: string,
     description: any,
-    category: string,
-    town: string,
+    category: any,
+    town: any,
     price: string,
     images: Media[],
-    videos: Media[]
+    videos: Media[],
+    rangeBooking: any
     
 }
 
 const EventForm = () => {
+    const navigate = useNavigate()
+    const { mutate: createEvent , isLoading: isCreatingEvent, isSuccess: isEventCreated } = useCreateEvent()
 
-    const handleCreateEvent = async (event: any)=>{
-        event.preventDefault()
+
+    useEffect( ()=>{
+        if(isEventCreated){
+            navigate("/events")
+        }
+
+    }, [isEventCreated, navigate])
+
+    const handleCreateEvent = async (eventData: any)=>{
+        let { images , rangeBooking , price ,  town , maxNbPlaces , category , videos , ...data } = eventData
+
+
+        const medias =  [ ...images , videos]
+
+        data  = {
+            ...data , 
+            medias,
+            town: town?.name  ?? "", 
+            category: category?.name ?? "",
+            beginsIn: rangeBooking?.[0]?.startDate,
+            endsIn: rangeBooking?.[0]?.endDate,
+            maxNbPlaces: Number(maxNbPlaces) ?? 0,
+            price: Number(price) ?? 0.0,
+        }
+        createEvent(data)
     }
 
     return (
@@ -52,24 +88,40 @@ const EventForm = () => {
                 <Stack  
                     spacing="20px"
                 >
+                    <HStack>
 
-                    <InputField
-                        registration={register('title')}
-                        error={formState.errors['title']}     
-                        label={"eventTilte"}
-                        placeholder=""
-                        inputStyle={{
-                            variant : "primary" , 
-                            fontSize : "xs" , 
-                            size : "lg",
-                            fontWeight : "normal",
-                            w: "600px"
-                        }}                          
-                    /> 
+                        <InputField
+                            registration={register('title')}
+                            error={formState.errors['title']}     
+                            label={"eventTilte"}
+                            placeholder=""
+                            inputStyle={{
+                                variant : "primary" , 
+                                fontSize : "xs" , 
+                                size : "lg",
+                                fontWeight : "normal",
+                            }}                          
+                        /> 
+
+                        <NumberInputFieldComponent 
+                            registration={register('maxNbPlaces')}
+                            error={formState.errors['maxNbPlaces']}     
+                            label={"numberPlaces"}
+                            placeholder=""
+                            inputStyle={{
+                                variant : "primary" , 
+                                fontSize : "xs" , 
+                                size : "lg",
+                                fontWeight : "normal"
+                            }}                          
+                        />  
+
+                    </HStack>
 
                     <TextEditorfield 
                         registration={register('description')}
-                        // error={formState.errors['description']}     
+                        // error={formState.errors['description']}    
+                        setValue={setValue} 
                         label={"description"}
                         placeholder=""
                         w="100%"
@@ -131,6 +183,21 @@ const EventForm = () => {
 
                     </HStack>
 
+
+                    <CalandarRangeField
+                        registration={register('rangeBooking')}   
+                        label={"validDateBooking"}
+                        setValue={setValue}
+                        // defaultValue={}
+                        inputStyle={{
+                            variant : "primary" , 
+                            fontSize : "xs" , 
+                            size : "lg",
+                            fontWeight : "normal",
+                            w: "600px"
+                        }}                          
+                    /> 
+
                     <MultipleImageField 
                         registration={register('images')}
                         setValue={setValue}
@@ -169,6 +236,8 @@ const EventForm = () => {
                         lineHeight="21px"
                         fontWeight="500"
                         fontSize="18px"
+                        type='submit'
+                        isLoading={isCreatingEvent}
                         
                     >
                         <Text  

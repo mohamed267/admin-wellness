@@ -30,8 +30,8 @@ export const SIDEBAR_ITEMS: Array<SideBarItem> = [
           },
           {
             label: 'partners',
-            href: "/users/partners", 
-            activeKey: "/users/partners",
+            href: "/users/partners/organizers", 
+            activeKey: "/users/partners/organizers",
           }
         ]
     },
