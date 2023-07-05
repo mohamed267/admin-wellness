@@ -7,11 +7,31 @@ import { PartnersRoutes } from "features/partners/routes";
 import { UsersRoutes } from "features/users/routes";
 import { SellersRoutes } from "features/seller/routes"
 
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { useUser } from "lib/auth";
+import { useEffect } from "react";
 
 
 
 const App = () => {
+
+    const navigate  =  useNavigate() 
+    const { data: user } =  useUser()
+    const location = useLocation()
+
+    useEffect(()=>{
+
+        if(!user){
+            navigate("/auth/admin/login")
+        }else{
+            if(!location.pathname || location.pathname === "/"){
+                navigate("/dashboard")
+            }
+        }
+
+
+
+    }  ,[user, navigate, location])
     
 
     return (

@@ -2,6 +2,7 @@
   "name": "wellness-admin",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/admin",
   "dependencies": {
     "@chakra-ui/react": "^2.6.1",
     "@editorjs/code": "^2.8.0",

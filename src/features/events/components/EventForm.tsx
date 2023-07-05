@@ -59,7 +59,7 @@ const EventForm = () => {
     }, [isEventCreated, navigate])
 
     const handleCreateEvent = async (eventData: any)=>{
-        let { images , rangeBooking , price ,  town , maxNbPlaces , category , videos , ...data } = eventData
+        let { images , rangeBooking ,  town  , category , videos , price , maxNbPlaces  , ...data } = eventData
 
 
         const medias =  [ ...images , videos]
@@ -71,8 +71,8 @@ const EventForm = () => {
             category: category?.name ?? "",
             beginsIn: rangeBooking?.[0]?.startDate,
             endsIn: rangeBooking?.[0]?.endDate,
-            maxNbPlaces: Number(maxNbPlaces) ?? 0,
-            price: Number(price) ?? 0.0,
+            maxNbPlaces: Number(maxNbPlaces) ??0 ,
+            price : Number(price) ?? 0
         }
         createEvent(data)
     }
@@ -107,6 +107,7 @@ const EventForm = () => {
                             registration={register('maxNbPlaces')}
                             error={formState.errors['maxNbPlaces']}     
                             label={"numberPlaces"}
+                            setValue={setValue}
                             placeholder=""
                             inputStyle={{
                                 variant : "primary" , 
@@ -168,7 +169,8 @@ const EventForm = () => {
 
                         <NumberInputFieldComponent 
                             registration={register('price')}
-                            error={formState.errors['price']}     
+                            error={formState.errors['price']}   
+                            setValue={setValue}  
                             label={"price"}
                             placeholder=""
                             inputStyle={{
