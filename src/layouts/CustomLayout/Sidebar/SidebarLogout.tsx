@@ -27,7 +27,7 @@ const SidebarLogout = () => {
                     logout
                 </Text>
             </Flex>
-        // </Link>
+        // </Link>   
     )
 }
 
