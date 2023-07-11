@@ -8,7 +8,6 @@ import {UseFormRegisterReturn} from "react-hook-form"
 import {AiOutlinePlus} from "react-icons/ai"
 import {RiDeleteBin7Fill } from "react-icons/ri"
 import { FormattedMessage } from 'react-intl'
-import PhotoUploadBox from './PhotoUploadBox'
 import ImageUploadIcon from 'assets/icons/uploads/videoUploadIcon'
 import VideoUploadBox from './VideoUploadBox'
 

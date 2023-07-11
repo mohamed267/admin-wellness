@@ -50,5 +50,15 @@
     "reduction": "reduction",
     "addCoupon": "add coupon",
     "eventOrganizer": "event organizer",
-    "seller": "seller"
+    "seller": "seller",
+    "algeria": "algeria",
+    "saudi": "saudi",
+    "password": "password",
+    "b":"b",
+    "kb": "kb",
+    "mb": "mb",
+    "gb": "gb",
+    "allCategories": "all categories",
+    "allCities": "all cities",
+    "addedDate": "added date"
 }

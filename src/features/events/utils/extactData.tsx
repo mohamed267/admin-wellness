@@ -1,4 +1,4 @@
-import { Coupon, CouponResponse, Event, EventResponse } from "../types";
+import { Coupon, CouponResponse, Event, EventCategory, EventCategoryListItem, EventResponse, EventTown, EventTownListItem } from "../types";
 
 export const extractEvents = (eventRespose: EventResponse[] ):Event[]=>{
 
@@ -19,6 +19,40 @@ export const extractEvents = (eventRespose: EventResponse[] ):Event[]=>{
 
 }
 
+
+
+export const extactEventCategories = (eventCategoriesRespose: EventCategory[] ):EventCategoryListItem[]=>{
+
+    return (eventCategoriesRespose?.map((eventCategory:EventCategory)=>(
+        {
+            id: eventCategory?.id,
+            name: eventCategory?.name,
+            createdAt: eventCategory?.createdAt,
+            image: eventCategory?.image,
+            consultData:{
+                id: eventCategory?.id
+            }
+        }
+    )) ??[])
+
+}
+
+
+export const extactEventTowns = (eventTownsRespose: EventTown[] ):EventTownListItem[]=>{
+
+    return (eventTownsRespose?.map((eventTown:EventTown)=>(
+        {
+            id: eventTown?.id,
+            name: eventTown?.name,
+            createdAt: eventTown?.createdAt,
+            image: eventTown?.image,
+            consultData:{
+                id: eventTown?.id
+            }
+        }
+    )) ??[])
+
+}
 
 
 export const extractCoupons = (couponsRespose: CouponResponse[] ):Coupon[]=>{

@@ -13,10 +13,50 @@ export type  Event ={
     }
 }
 
+// event categores
 export type  EventCategory = {
     id: string,
-    name : string
+    name : string,
+    image: string, 
+    createdAt: string
+}
+
+
+
+export type  EventCategoryListItem = {
+    id: string,
+    name : string,
+    image: string, 
+    createdAt: string,
+    consultData: {
+        id: string
+    }
 } 
+
+
+// evrnt towns 
+
+export type EventTown = {
+    id: string,
+    name : string,
+    image: string, 
+    createdAt: string
+}
+
+
+
+export type  EventTownListItem = {
+    id: string,
+    name : string,
+    image: string, 
+    createdAt: string,
+    consultData: {
+        id: string
+    }
+} 
+
+
+
 
 export type  EventResponse ={
     id: string,
@@ -26,6 +66,21 @@ export type  EventResponse ={
     price: number,
     // score: number,
     status: "pending" | "active"
+}
+
+
+
+///category 
+
+
+
+
+
+export type Category = {
+    id: string, 
+    name: number,
+    cretedAt: string,
+    image: string
 }
 
 

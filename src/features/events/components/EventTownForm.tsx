@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { z } from 'zod';
 import { Media } from 'features/global';
@@ -8,6 +8,7 @@ import Form from 'components/form/Form';
 import { FormattedMessage } from 'react-intl';
 import SingleImageField from 'components/form/SingleImageField';
 import { useCreateTown } from '../api/createTown';
+import { useNavigate } from 'react-router-dom';
 
 
 const schemaEvent = z.object({
@@ -21,7 +22,8 @@ type IEventForm  = {
 }
 
 const EventTownForm = () => {
-    const { mutate: createTown , isLoading: isCreatingTown } = useCreateTown()
+    const navigate  =  useNavigate()
+    const { mutate: createTown , isLoading: isCreatingTown , isSuccess: isTownCreated } = useCreateTown()
 
 
 
@@ -36,6 +38,13 @@ const EventTownForm = () => {
         )
 
     }
+
+    
+    useEffect(()=>{
+        if(isTownCreated){
+            navigate("/events/city")
+        }
+    } , [isTownCreated, navigate])
 
 
     return (
@@ -94,6 +103,7 @@ const EventTownForm = () => {
                             fontWeight="500"
                             fontSize="18px"
                             type='submit'
+                            isLoading={isCreatingTown}
                             
                         >
                             <Text  

@@ -64,7 +64,7 @@ const ListEvents = () => {
                     </Text>
                 </Button>
             </Link>
-            <Link to="/events/category/new">
+            <Link to="/events/category">
                 <Button 
                   color="primary.500"
                   borderRadius="31px"
@@ -86,11 +86,11 @@ const ListEvents = () => {
                     }
                     fontSize="14px"
                   >
-                    <FormattedMessage  id="newCategory" />
+                    <FormattedMessage  id="allCategories" />
                   </Text>
                 </Button>
             </Link>
-            <Link to="/events/city/new">
+            <Link to="/events/city">
                 <Button 
                   color="primary.500"
                   borderRadius="31px"
@@ -112,7 +112,7 @@ const ListEvents = () => {
                     }
                     fontSize="14px"
                   >
-                    <FormattedMessage  id="newCity" />
+                    <FormattedMessage  id="allCities" />
                   </Text>
                 </Button>
             </Link>

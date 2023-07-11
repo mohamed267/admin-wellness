@@ -7,7 +7,7 @@ type DateProps = {
 }
 
 
-const Date = ({value} : DateProps) => {
+const DateCell = ({value} : DateProps) => {
     const textColor = useColorModeValue("gray.700" , "white")
     return (
       <Text 
@@ -39,4 +39,4 @@ const Date = ({value} : DateProps) => {
 }
 
 
-export default Date
+export default DateCell

@@ -4,7 +4,7 @@ import { useNotification } from "stores/notification"
 
 
 
-export const useCreateCategory = ()=>{
+export const useDeleteCategory= ()=>{
     const {addNotification} = useNotification()
 
 
@@ -38,20 +38,18 @@ export const useCreateCategory = ()=>{
         onSuccess: () => {
 
         } , 
-        mutationFn : createCategory
+        mutationFn : deleteCategory
     });
 }
 
 
 
 
-export const createCategory  =async (data :any ):Promise<any>  =>{
-
+export const deleteCategory  =async (data :any ):Promise<any>  =>{
    
-    const category =  await   axios.post(
-        `/api/events/add-category`,
-        data
+    const profile =  await   axios.delete(
+        `/api/events/delete-category/${data?.categoryId}`
     )
-    return category
+    return profile
     
 }

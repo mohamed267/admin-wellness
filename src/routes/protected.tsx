@@ -16,22 +16,28 @@ import { useEffect } from "react";
 const App = () => {
 
     const navigate  =  useNavigate() 
-    const { data: user } =  useUser()
+    const { data: user , isFetched: isUserFetched } =  useUser()
     const location = useLocation()
+
+
+
 
     useEffect(()=>{
 
-        if(!user){
-            navigate("/auth/admin/login")
-        }else{
-            if(!location.pathname || location.pathname === "/"){
-                navigate("/dashboard")
+        if(isUserFetched){
+            if(!user){
+                navigate("/auth/admin/login" , {state: { from : location?.pathname}})
+            }else{
+                if(!location.pathname || location.pathname === "/"){
+                    navigate("/dashboard")
+                }
             }
+
         }
 
 
 
-    }  ,[user, navigate, location])
+    }  ,[user, navigate, location, isUserFetched])
     
 
     return (

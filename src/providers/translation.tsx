@@ -5,16 +5,17 @@ import en from "translations/en.json";
 
 const LOCALS = {
   en: "en",
-  ar: "ar",
+  // ar: "ar",
 };
 
 const TRANSLATIONS = {
   en,
-  ar,
+  // ar,
 };
 
 type TranslationProps = {
-  locale: "ar" | "en";
+  locale: "en";
+  // "ar" | 
 };
 
 const TranslationProvider = ({

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { z } from 'zod';
 import { Media } from 'features/global';
@@ -8,6 +8,7 @@ import Form from 'components/form/Form';
 import { FormattedMessage } from 'react-intl';
 import SingleImageField from 'components/form/SingleImageField';
 import { useCreateCategory } from '../api/createCategory';
+import { useNavigate } from 'react-router-dom';
 
 
 const schemaEvent = z.object({
@@ -21,7 +22,8 @@ type IEventForm  = {
 }
 
 const EventCategoryForm = () => {
-    const { mutate: createCategory , isLoading: isCreatingCategory } = useCreateCategory()
+    const navigate =  useNavigate()
+    const { mutate: createCategory , isLoading: isCreatingCategory , isSuccess: isCategoryCreated } = useCreateCategory()
 
 
     const handleAddCategory = (categoryData: any) =>{
@@ -34,6 +36,12 @@ const EventCategoryForm = () => {
         )
 
     }
+
+    useEffect(()=>{
+        if(isCategoryCreated){
+            navigate("/events/category")
+        }
+    } , [isCategoryCreated, navigate])
 
 
     return (

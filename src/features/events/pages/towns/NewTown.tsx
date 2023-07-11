@@ -5,7 +5,7 @@ import { useDirection } from 'hooks/useDirection'
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
 import { FormattedMessage } from 'react-intl'
-import EventTownForm from '../components/EventTownForm'
+import EventTownForm from '../../components/EventTownForm'
 
 const NewTown = () => {
     const  {dir } = useDirection()

@@ -20,5 +20,6 @@ export type BaseEntity  ={
 
 export type EventCategory = {
     id: string,
-    name: string
+    name: string,
+    image: string
 }

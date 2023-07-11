@@ -4,13 +4,15 @@ import { EventCategory } from "../types"
 import { axios } from "lib/axios"
 import { Meta } from "features/global"
 
+import { extactEventCategories } from "../utils/extactData"
 
 
-type searchEventCategoriesQueryType = {
-    search?: string
+
+type getEventCategoriesQueryType = {
+    get?: string
 }
 
-export const searchEventCategories = async  (query: searchEventCategoriesQueryType ={}): Promise<EventCategory[]> =>{
+export const getEventCategories = async  (query: getEventCategoriesQueryType ={}): Promise<EventCategory[]> =>{
      
     const categories = await axios.get("/api/events/categories" , {
         params:{
@@ -19,24 +21,24 @@ export const searchEventCategories = async  (query: searchEventCategoriesQueryTy
     }) as any ;
 
 
-    return categories
+    return extactEventCategories(categories)
 
 }
 
-type QueryFnType = typeof searchEventCategories;
+type QueryFnType = typeof getEventCategories;
 
 
 
 export type UseUsersOptions = {
     config?: QueryConfig<QueryFnType>,
-    query?: searchEventCategoriesQueryType,
+    query?: getEventCategoriesQueryType,
 }
 
 
 export const useCategories = ( {config , query}: UseUsersOptions ) =>{
     return  useQuery<ExtractFnReturnType<QueryFnType>>({
         queryKey: ["/eventCategories"],
-        queryFn: ()=> searchEventCategories(query),
+        queryFn: ()=> getEventCategories(query),
         ...config
     })
 }

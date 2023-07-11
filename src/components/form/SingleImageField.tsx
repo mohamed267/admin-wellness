@@ -3,12 +3,13 @@ import PropTypes from 'prop-types'
 import FieldWrapper, { FieldWrapperPassThroughProps } from './FieldWrapper'
 import { Avatar, Center, Circle, Flex, Icon, Image, Input, Stack, Text, useToken } from '@chakra-ui/react'
 import {UseFormRegisterReturn} from "react-hook-form"
+import uuid from 'react-uuid';
 
 
 import {AiOutlinePlus} from "react-icons/ai"
 import {RiDeleteBin7Fill } from "react-icons/ri"
 import { FormattedMessage } from 'react-intl'
-import PhotoUploadBox from './PhotoUploadBox'
+import FileUploadBox from './FileUploadBox'
 import If from 'common/If'
 import ImageUploadIcon from 'assets/icons/uploads/imageUploadIcon'
 
@@ -33,6 +34,7 @@ const SingleImageField = (
    }:InputFieldProps
 
 ) => {
+    // let uuid = 1
     const [ primaryColor , black200 ] =  useToken( "colors"  , ["primary.500" , "black.200" ])
     const addRef = useRef<any>(null);
     const [image , setImage] =useState<any>(null)
@@ -46,6 +48,7 @@ const SingleImageField = (
     }; 
     const handleImageUploaded = (url: string) =>{
         setImage({url})
+        setFile(null)
     }
     const deleteImage = (index:any) =>{
         setImage(null)
@@ -67,13 +70,6 @@ const SingleImageField = (
                 rowGap={{base : 5 , lg : 30}}
                 flexWrap="wrap"
                 >
-                    <If condition={file} >
-                        <PhotoUploadBox 
-                            file={file} 
-                            uploaded={handleImageUploaded}
-                            imageType={imageType}
-                        />
-                    </If>
 
                     <If condition={image} >
                         <Center
@@ -144,6 +140,17 @@ const SingleImageField = (
 
 
             </Flex>
+            <Stack >
+                <If condition={file} >
+                    <FileUploadBox 
+                        key={uuid()}
+                        file={file} 
+                        uploaded={handleImageUploaded}
+                        imageType={imageType}
+                    />
+                </If>
+
+            </Stack>
         </FieldWrapper>
     )
 }

@@ -56,7 +56,7 @@ const AdminLoginForm = () => {
                         error={formState.errors['phoneNumber']}    
                         name='phone'
                         setValue={setValue}
-                        label={"phone number"}
+                        label={"phoneNumber"}
                         inputStyle={{
                             variant : "auth" , 
                             fontSize : "sm" , 
@@ -69,7 +69,7 @@ const AdminLoginForm = () => {
                     <InputField
                         registration={register('password')}
                         error={formState.errors['password']}     
-                        label={"Password"}
+                        label={"password"}
                         placeholder=""
                         type="password"
                         inputStyle={{
