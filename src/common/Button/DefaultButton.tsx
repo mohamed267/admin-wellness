@@ -1,20 +1,18 @@
-import React, {  PropsWithChildren } from 'react'
-import PropTypes from 'prop-types'
-import { Button } from '@chakra-ui/react'
+import { Button } from '@chakra-ui/react';
 
-const DefaultButton = ({ children , ...props }: any) => {
+const DefaultButton = ({ children, ...props }: any) => {
   return (
     <Button
-        _firstLetter={{
-            textTransform: "capitalize"
-        }} 
-        {...props} 
+      _firstLetter={{
+        textTransform: 'capitalize',
+      }}
+      {...props}
     >
-    {children}    
+      {children}
     </Button>
-  )
-}
+  );
+};
 
-DefaultButton.propTypes = {}
+DefaultButton.propTypes = {};
 
-export default DefaultButton
+export default DefaultButton;

@@ -1,16 +1,9 @@
-export type AuthUser =  any;
+export type AuthUser = any;
 export type AuthResponse = {
-    accessToken: string
-}; 
-
-
+  accessToken: string;
+};
 
 export type AdminLoginCredentialsDto = {
-    password: string ,
-    phoneNumber: string
-}
-
-
-
-
-
+  password: string;
+  phoneNumber: string;
+};

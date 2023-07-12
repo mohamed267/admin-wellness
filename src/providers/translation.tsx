@@ -1,26 +1,26 @@
-import { PropsWithChildren } from "react";
-import { IntlProvider } from "react-intl";
-import ar from "translations/ar.json";
-import en from "translations/en.json";
+import { PropsWithChildren } from 'react';
+import { IntlProvider } from 'react-intl';
+import ar from 'translations/ar.json';
+import en from 'translations/en.json';
 
 const LOCALS = {
-  en: "en",
-  // ar: "ar",
+  en: 'en',
+  ar: 'ar',
 };
 
 const TRANSLATIONS = {
   en,
-  // ar,
+  ar,
 };
 
 type TranslationProps = {
-  locale: "en";
-  // "ar" | 
+  locale: 'en';
+  // "ar" |
 };
 
 const TranslationProvider = ({
   children,
-  locale = "en",
+  locale = 'en',
 }: PropsWithChildren<TranslationProps>) => {
   return (
     <IntlProvider messages={TRANSLATIONS[locale]} locale={LOCALS[locale]}>

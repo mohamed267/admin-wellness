@@ -1,14 +1,9 @@
-
-import { useContext, createContext } from "react";
-
-
-
+import { useContext, createContext } from 'react';
 
 export const FormContext = createContext<{
-    isError?: any
+  isError?: any;
 }>({
-    isError: false
-})
+  isError: false,
+});
 
-
-export const useFormContext= () => useContext(FormContext);
+export const useFormContext = () => useContext(FormContext);

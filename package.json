@@ -54,7 +54,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint --fix --ext .js,.ts,.tsx ./src --ignore-path .gitignore"
   },
   "eslintConfig": {
     "extends": [
@@ -83,6 +84,11 @@
     "@types/react-date-range": "^1.4.4",
     "@types/react-dom": "^18.2.4",
     "@types/react-scrollbar": "^0.5.3",
-    "@types/react-table": "^7.7.14"
+    "@types/react-table": "^7.7.14",   
+    "prettier": "^3.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "eslint": "^8.44.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^5.0.0"
   }
 }

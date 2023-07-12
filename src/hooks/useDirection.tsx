@@ -1,12 +1,9 @@
-import { useIntl } from "react-intl"
+import { useIntl } from 'react-intl';
 
+export const useDirection = () => {
+  const { locale } = useIntl();
 
+  const dir = locale === 'ar' ? 'rtl' : 'ltr';
 
-export const useDirection = () =>{
-    
-    const { locale } = useIntl()
-
-    const dir = locale === 'ar' ? 'rtl' : 'ltr'
-
-    return {dir}
-}
+  return { dir };
+};

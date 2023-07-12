@@ -1,21 +1,8 @@
-import { Image, Text } from '@chakra-ui/react'
-import React from 'react'
-import { CellProps } from 'types'
+import { Image } from '@chakra-ui/react';
+import { CellProps } from 'types';
 
-const CategoryIconCell = (
-    {
-        value
-    }:CellProps
-) => {
-    
-  return (
-    <Image
-        src={value ?? ""} 
-        width="50px"
-        h="50px"
-    />
-  )
-}
+const CategoryIconCell = ({ value }: CellProps) => {
+  return <Image src={value ?? ''} width="50px" h="50px" />;
+};
 
-
-export default CategoryIconCell
+export default CategoryIconCell;

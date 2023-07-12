@@ -1,52 +1,45 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import {
-  IconButton,
-  Box,
-  Image,
   Center,
   // CircularProgress,
-  // CircularProgressLabel,
-  Input,
-  Stack,
-  color,
-  Text,
+  // CircularProgressLabel
   CircularProgress,
   CircularProgressLabel,
-} from "@chakra-ui/react";
-import If from "common/If";
-import { useUploadFile } from "features/uploadFiles";
+} from '@chakra-ui/react';
+import If from 'common/If';
+import { useUploadFile } from 'features/uploadFiles';
 
 type VideoBoxProps = {
   file: any;
   uploaded?: any;
-  name?: string,
-  videoType: string
+  name?: string;
+  videoType: string;
 };
 
-const VideoUploadBox = ({ file , videoType , uploaded = ()=>{} , name="file" }: VideoBoxProps) => {
+const VideoUploadBox = ({
+  file,
+  videoType,
+  uploaded = () => {},
+  name = 'file',
+}: VideoBoxProps) => {
   const [completeProgress, setCompleteProgress] = useState<number>(0);
   const {
     mutate: uploadFile,
     data: fileData,
     isSuccess: isUploaded,
-    isLoading: uploading,
-    reset: resetUpload,
-  } = useUploadFile()
+  } = useUploadFile();
 
-
-
- 
   useEffect(() => {
-      if (file) {
-        const data = new FormData();
-        data.append(name, file)
-        uploadFile({ data, setCompleteProgress , fileType: videoType });
+    if (file) {
+      const data = new FormData();
+      data.append(name, file);
+      uploadFile({ data, setCompleteProgress, fileType: videoType });
     }
   }, [file]);
 
   useEffect(() => {
     if (isUploaded) {
-        uploaded(fileData?.file)
+      uploaded(fileData?.file);
     }
   }, [isUploaded]);
 
@@ -56,10 +49,10 @@ const VideoUploadBox = ({ file , videoType , uploaded = ()=>{} , name="file" }: 
         <CircularProgress
           value={completeProgress}
           color="primary.500"
-          size={"100px"}
+          size={'100px'}
         >
           <CircularProgressLabel
-            fontSize={"lg"}
+            fontSize={'lg'}
           >{`${completeProgress}%`}</CircularProgressLabel>
         </CircularProgress>
       </Center>

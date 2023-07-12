@@ -1,12 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-
 const ListReservations = () => {
-  return (
-    <div>ListReservations</div>
-  )
-}
+  return <div>ListReservations</div>;
+};
 
-ListReservations.propTypes = {}
+ListReservations.propTypes = {};
 
-export default ListReservations
+export default ListReservations;

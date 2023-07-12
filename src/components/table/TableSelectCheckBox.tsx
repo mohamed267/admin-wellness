@@ -1,30 +1,26 @@
-import React, { Ref, forwardRef, useEffect, useRef } from 'react'
-import PropTypes from 'prop-types'
-import { Checkbox, Input, useToken } from '@chakra-ui/react'
+import React, { forwardRef } from 'react';
+import { Checkbox } from '@chakra-ui/react';
 
 const TableSelectCheckBox = forwardRef(
-    ({ indeterminate, ...rest }:any, ref: any) => {
+  ({ indeterminate, ...rest }: any, ref: any) => {
+    const defaultRef = React.useRef();
+    const resolvedRef = ref || defaultRef;
 
-          const defaultRef = React.useRef()
-      const resolvedRef = ref || defaultRef
+    return (
+      <>
+        <Checkbox
+          colorScheme="primary"
+          size="lg"
+          borderRadius="30px"
+          isChecked={rest.checked}
+          ref={resolvedRef}
+          isIndeterminate={indeterminate || false}
+          {...rest}
+          variant="primary"
+        />
+      </>
+    );
+  },
+);
 
-  
-      return (
-        <>
-          <Checkbox
-            colorScheme='primary'  
-            size="lg"
-            borderRadius="30px"
-            isChecked={rest.checked}   
-            ref={resolvedRef} 
-            isIndeterminate={indeterminate || false}
-            {...rest} 
-            variant="primary"
-          />
-        </>
-      )
-    }
-  )
-
-
-export default TableSelectCheckBox
+export default TableSelectCheckBox;

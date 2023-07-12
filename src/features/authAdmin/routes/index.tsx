@@ -1,13 +1,12 @@
-import { Route, Routes } from "react-router-dom"
-import AdminLogin from "../pages/AdminLogin"
+import { Route, Routes } from 'react-router-dom';
+import AdminLogin from '../pages/AdminLogin';
 
+//components
 
-//components 
-
-export const AuthAdminRoutes = ()=>{
-    return(
-        <Routes>
-            <Route  path="/login" element={<AdminLogin />} />
-        </Routes>
-    )
-}
+export const AuthAdminRoutes = () => {
+  return (
+    <Routes>
+      <Route path="/login" element={<AdminLogin />} />
+    </Routes>
+  );
+};

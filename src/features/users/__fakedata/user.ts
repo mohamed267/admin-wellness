@@ -1,4 +1,3 @@
-
 import { User } from '../types';
 
 // const users:any[] = []
@@ -6,7 +5,6 @@ import { User } from '../types';
 // const statuses = [
 //     "active", "banned"
 // ]
-
 
 // for(let i =0; i<8 ; i++){
 //     users.push({
@@ -19,72 +17,69 @@ import { User } from '../types';
 //     });
 // }
 
-
-export const  users: User[] = [
-    {
-        id:  "1324124",
-        createdAt: '2010-01-01',
-        email: "email@gmail.com",
-        tickets:12,
-        score: 123,
-        status: "active"
-    },
-    {
-        id:  "1324124",
-        createdAt: '2010-01-01',
-        email: "email@gmail.com",
-        tickets:12,
-        score: 123,
-        status: "active"
-    },
-    {
-        id:  "1324124",
-        createdAt: '2010-01-01',
-        email: "email@gmail.com",
-        tickets:12,
-        score: 123,
-        status: "banned"
-    },
-    {
-        id:  "1324124",
-        createdAt: '2010-01-01',
-        email: "email@gmail.com",
-        tickets:12,
-        score: 123,
-        status: "banned"
-    },
-    {
-        id:  "1324124",
-        createdAt: '2010-01-01',
-        email: "email@gmail.com",
-        tickets:12,
-        score: 123,
-        status: "active"
-    },
-    {
-        id:  "1324124",
-        createdAt: '2010-01-01',
-        email: "email@gmail.com",
-        tickets:12,
-        score: 123,
-        status: "banned"
-    },
-    {
-        id:  "1324124",
-        createdAt: '2010-01-01',
-        email: "email@gmail.com",
-        tickets:12,
-        score: 123,
-        status: "banned"
-    },
-    {
-        id:  "1324124",
-        createdAt: '2010-01-01',
-        email: "email@gmail.com",
-        tickets:12,
-        score: 123,
-        status: "active"
-    },
-
+export const users: User[] = [
+  {
+    id: '1324124',
+    createdAt: '2010-01-01',
+    email: 'email@gmail.com',
+    tickets: 12,
+    score: 123,
+    status: 'active',
+  },
+  {
+    id: '1324124',
+    createdAt: '2010-01-01',
+    email: 'email@gmail.com',
+    tickets: 12,
+    score: 123,
+    status: 'active',
+  },
+  {
+    id: '1324124',
+    createdAt: '2010-01-01',
+    email: 'email@gmail.com',
+    tickets: 12,
+    score: 123,
+    status: 'banned',
+  },
+  {
+    id: '1324124',
+    createdAt: '2010-01-01',
+    email: 'email@gmail.com',
+    tickets: 12,
+    score: 123,
+    status: 'banned',
+  },
+  {
+    id: '1324124',
+    createdAt: '2010-01-01',
+    email: 'email@gmail.com',
+    tickets: 12,
+    score: 123,
+    status: 'active',
+  },
+  {
+    id: '1324124',
+    createdAt: '2010-01-01',
+    email: 'email@gmail.com',
+    tickets: 12,
+    score: 123,
+    status: 'banned',
+  },
+  {
+    id: '1324124',
+    createdAt: '2010-01-01',
+    email: 'email@gmail.com',
+    tickets: 12,
+    score: 123,
+    status: 'banned',
+  },
+  {
+    id: '1324124',
+    createdAt: '2010-01-01',
+    email: 'email@gmail.com',
+    tickets: 12,
+    score: 123,
+    status: 'active',
+  },
 ];
-

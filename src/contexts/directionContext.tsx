@@ -1,12 +1,9 @@
-import { useContext, createContext } from "react";
-
-
+import { useContext, createContext } from 'react';
 
 export const DirectionContext = createContext<{
-  dir: string,
+  dir: string;
 }>({
-    dir: "ltr"
-})
+  dir: 'ltr',
+});
 
-
-export const useDirectionContext= () => useContext(DirectionContext);
+export const useDirectionContext = () => useContext(DirectionContext);

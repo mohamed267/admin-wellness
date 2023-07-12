@@ -1,12 +1,9 @@
-import { Box } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react';
 
-type HDividerProps = any
+type HDividerProps = any;
 
-const HDivider = (rest:HDividerProps) => {
-  return (
-    <Box {...rest} h="100%"/>
-  )
-}
+const HDivider = (rest: HDividerProps) => {
+  return <Box {...rest} h="100%" />;
+};
 
-
-export default HDivider
+export default HDivider;

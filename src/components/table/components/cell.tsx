@@ -1,25 +1,19 @@
-import { Text } from '@chakra-ui/react'
+import { Text } from '@chakra-ui/react';
 
 type CellProps = {
-    value : string
-}
+  value: string;
+};
 
-const Cell = (
-    {
-        value
-    }:CellProps
-) => {
-    
+const Cell = ({ value }: CellProps) => {
   return (
-    <Text 
-        // textTransform={"capitalize"}
-        fontSize='sm' 
-        px={2}
+    <Text
+      // textTransform={"capitalize"}
+      fontSize="sm"
+      px={2}
     >
-        {value}
+      {value}
     </Text>
-  )
-}
+  );
+};
 
-
-export default Cell
+export default Cell;

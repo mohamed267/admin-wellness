@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
-import FieldWrapper, { FieldWrapperPassThroughProps } from "./FieldWrapper";
+import { useEffect } from 'react';
+import FieldWrapper, { FieldWrapperPassThroughProps } from './FieldWrapper';
 
-import { UseFormRegisterReturn } from "react-hook-form";
+import { UseFormRegisterReturn } from 'react-hook-form';
 
-import { AsyncSelect } from "chakra-react-select";
-import { useIntl } from "react-intl";
+import { AsyncSelect } from 'chakra-react-select';
+import { useIntl } from 'react-intl';
 
 type InputFieldProps = FieldWrapperPassThroughProps & {
   registration: Partial<UseFormRegisterReturn>;
@@ -24,8 +23,7 @@ const SelectAsyncFieldComponent = ({
   registration,
   error,
   label,
-  controlStyles = {
-  },
+  controlStyles = {},
   changed = () => {
     return;
   },
@@ -70,12 +68,12 @@ const SelectAsyncFieldComponent = ({
         getOptionValue={(cell: any) => cell[optionValue]}
         getOptionLabel={(cell: any) => cell[optionLabel]}
         chakraStyles={{
-          control: (provided: any, state: any) => ({
+          control: (provided: any) => ({
             ...provided,
             ...controlStyles,
-          })
+          }),
         }}
-        placeholder={intl.formatMessage({id: "search..."})}
+        placeholder={intl.formatMessage({ id: 'search...' })}
       />
     </FieldWrapper>
   );

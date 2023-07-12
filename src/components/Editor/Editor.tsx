@@ -1,8 +1,8 @@
 //./components/Editor
-"use client"
-import React, { memo, useEffect, useRef } from "react";
-import EditorJS, { OutputData } from "@editorjs/editorjs";
-import { EDITOR_TOOLS } from "./EditorTools";
+'use client';
+import { memo, useEffect, useRef } from 'react';
+import EditorJS, { OutputData } from '@editorjs/editorjs';
+import { EDITOR_TOOLS } from './EditorTools';
 
 //props
 type Props = {
@@ -23,7 +23,7 @@ const Editor = ({ data, onChange, holder }: Props) => {
         holder: holder,
         tools: EDITOR_TOOLS,
         data,
-        async onChange(api: any, event: any) {
+        async onChange(api: any) {
           const data = await api.saver.save();
           onChange(data);
         },
@@ -38,7 +38,6 @@ const Editor = ({ data, onChange, holder }: Props) => {
       }
     };
   }, []);
-
 
   return <div id={holder} />;
 };

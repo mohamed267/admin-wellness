@@ -1,1 +1,1 @@
-export * from "./api/uploadFile";
+export * from './api/uploadFile';
