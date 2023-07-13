@@ -16,6 +16,8 @@ import { UseFormRegisterReturn } from 'react-hook-form';
 import { RiDeleteBin7Fill } from 'react-icons/ri';
 import FileUploadBox from './FileUploadBox';
 import ImageUploadIcon from 'assets/icons/uploads/imageUploadIcon';
+import uuid from 'react-uuid';
+import If from 'common/If';
 
 type InputFieldProps = FieldWrapperPassThroughProps & {
   registration: Partial<UseFormRegisterReturn>;
@@ -38,16 +40,25 @@ const MultipleImageField = ({
   const [black200] = useToken('colors', ['black.200']);
   const addRef = useRef<any>(null);
   const [images, setImages] = useState<any>(defaultValue);
+  const [filesUploaded, setFilesUploaded] = useState<string[]>([]);
 
   const [files, setFiles] = useState<any>([]);
 
   const addFiles = () => {
     const fileInput = addRef?.current;
-    const inputFiles = fileInput?.files ?? [];
-    inputFiles && setFiles([...files, ...inputFiles]);
+    const inputFiles = fileInput?.files ?? {};
+
+    const filesInstances = Object.keys(inputFiles)?.map((index: any) => ({
+      file: inputFiles[index],
+      id: uuid(),
+    }));
+    inputFiles && setFiles([...files, ...filesInstances]);
+    fileInput.value = null;
+    console.log('files => ', fileInput?.files);
   };
-  const handleImageUploaded = (url: string) => {
+  const handleImageUploaded = (url: string, id: string) => {
     setImages([...images, { url, type: 'image' }]);
+    setFilesUploaded([...filesUploaded, id]);
   };
   const deleteImage = (index: any) => {
     setImages(images.filter((image: any, key: any) => index !== key));
@@ -135,12 +146,13 @@ const MultipleImageField = ({
       </Flex>
       <Box>
         {files.map((file: any, key: any) => (
-          <FileUploadBox
-            file={file}
-            key={key}
-            imageType={imageType}
-            uploaded={handleImageUploaded}
-          />
+          <If key={key} condition={!filesUploaded?.includes(file?.id)}>
+            <FileUploadBox
+              file={file?.file}
+              imageType={imageType}
+              uploaded={(url: string) => handleImageUploaded(url, file?.id)}
+            />
+          </If>
         ))}
       </Box>
     </FieldWrapper>
