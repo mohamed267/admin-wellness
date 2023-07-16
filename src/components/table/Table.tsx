@@ -124,6 +124,7 @@ const TableComponent = <Entry extends { id: string }>({
             {' '}
             1 row selected{' '}
           </Text>
+          <HStack></HStack>
         </HStack>
         <Table {...getTableProps()}>
           <Thead>

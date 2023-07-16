@@ -83,7 +83,8 @@ export const globalStyles = {
       500: '#F7FF00',
     },
     badge: {
-      yellow: '#E9FF0E',
+      orange: { 800: '#EFA536' },
+      green: { 100: '#dbf2ef', 800: '#00A18E' },
     },
     // dark: {
     //     100: '#aac0fe',

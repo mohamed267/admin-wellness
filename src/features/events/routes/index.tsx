@@ -9,6 +9,7 @@ import NewCoupon from '../pages/coupons/NewCoupon';
 import ListCategories from '../pages/categories/ListCategories';
 import ListTowns from '../pages/towns/ListTowns';
 import EditCategory from '../pages/categories/EditCategory';
+import EditTown from '../pages/towns/EditTown';
 
 //components
 
@@ -23,6 +24,7 @@ export const EventsRoutes = () => {
           <Route path=":categoryId" element={<EditCategory />} />
         </Route>
         <Route path="city">
+          <Route path=":townId" element={<EditTown />} />
           <Route path="" element={<ListTowns />} />
           <Route path="new" element={<NewTown />} />
         </Route>

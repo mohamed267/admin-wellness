@@ -19,11 +19,16 @@ const ListCoupons = () => {
   const [pageIndex, setPageIndex] = useState(1);
 
   // const  [ pageIndex, setPageIndex ] = useState(1)
-  const { data: coupons } = useEventCoupons({
+  const { data: coupons, refetch: refetchEventCoupons } = useEventCoupons({
     query: {
       eventId,
+      page: pageIndex,
     },
   });
+
+  useEffect(() => {
+    refetchEventCoupons();
+  }, [pageIndex]);
 
   useEffect(() => {
     if (coupons?.meta) {

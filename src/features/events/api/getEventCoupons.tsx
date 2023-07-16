@@ -4,17 +4,17 @@ import { axios } from 'lib/axios';
 import { Meta } from 'features/global';
 import { useQuery } from '@tanstack/react-query';
 import { extractCoupons } from '../utils/extactData';
+import { GetEvenCoupontQueryParam } from '../queryParams/coupons';
 
 type EventCouponResponseProps = { meta: Meta; coupons: CouponResponse[] };
 type EventCouponProps = { meta: Meta; coupons: Coupon[] };
-type getEventCouponsQueryType = {
-  eventId?: string;
-};
 
-export const getEventCoupons = async (): Promise<EventCouponProps> => {
+export const getEventCoupons = async (
+  query: GetEvenCoupontQueryParam = {},
+): Promise<EventCouponProps> => {
   const eventCouponsResponse = (await axios.get('/api/event-coupons', {
     params: {
-      // ...query
+      ...query,
     },
   })) as EventCouponResponseProps;
   const coupons = extractCoupons(
@@ -28,14 +28,14 @@ type QueryFnType = typeof getEventCoupons;
 
 export type UseUsersOptions = {
   config?: QueryConfig<QueryFnType>;
-  query?: getEventCouponsQueryType;
+  query?: GetEvenCoupontQueryParam;
 };
 
-export const useEventCoupons = ({ config }: UseUsersOptions) => {
+export const useEventCoupons = ({ config, query }: UseUsersOptions) => {
   return useQuery<ExtractFnReturnType<QueryFnType>>({
     queryKey: ['eventCoupons'],
     //TODO:add  query handling
-    queryFn: () => getEventCoupons(),
+    queryFn: () => getEventCoupons(query),
     ...config,
   });
 };

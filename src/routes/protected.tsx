@@ -8,7 +8,8 @@ import { SellersRoutes } from 'features/seller/routes';
 
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useUser } from 'lib/auth';
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
+import { Center, Spinner } from '@chakra-ui/react';
 
 const App = () => {
   const navigate = useNavigate();
@@ -27,7 +28,17 @@ const App = () => {
     }
   }, [user, navigate, location, isUserFetched]);
 
-  return <Outlet />;
+  return (
+    <Suspense
+      fallback={
+        <Center w="100vx" h="100vh">
+          <Spinner />
+        </Center>
+      }
+    >
+      <Outlet />
+    </Suspense>
+  );
 };
 
 export const protectedRoutes = [

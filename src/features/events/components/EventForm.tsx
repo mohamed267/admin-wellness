@@ -79,6 +79,8 @@ const EventForm = () => {
       maxNbPlaces: Number(maxNbPlaces) ?? 0,
       price: Number(price) ?? 0,
     };
+    console.log('our data her is ', data);
+
     createEvent(data);
   };
 

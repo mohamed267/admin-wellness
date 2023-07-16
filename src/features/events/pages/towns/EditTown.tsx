@@ -3,26 +3,25 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   Stack,
-  Text,
 } from '@chakra-ui/react';
 import { useDirection } from 'hooks/useDirection';
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { useEventCategory } from 'features/events/api/categories/getEventCategory';
-import { useEffect } from 'react';
-import UpdateEventCatrgory from 'features/events/components/category/UpdateCategoryForm';
+// import { useEffect } from 'react';
 import uuid from 'react-uuid';
+// import { useEventTown } from 'features/events/api/town';
+import UpdateEventTown from 'features/events/components/town/UpdateTownForm';
 
-const EditCategory = () => {
+const EditTown = () => {
   const { dir } = useDirection();
-  const { categoryId } = useParams();
-  const { data: eventCategoryData } = useEventCategory({
-    query: { categoryId },
-  });
-  useEffect(() => {
-    console.log('our event data is ', eventCategoryData);
-  }, [eventCategoryData]);
+  //   const { townId } = useParams();
+  //   const { data: eventTownData } = useEventTown({
+  //     query: { townId },
+  //   });
+  //   useEffect(() => {
+  //     console.log('our event data is ', eventTownData);
+  //   }, [eventTownData]);
 
   return (
     <Stack py="30px">
@@ -53,24 +52,29 @@ const EditCategory = () => {
           fontSize="md"
         >
           <BreadcrumbLink>
-            <Link to="/events/category">
-              <FormattedMessage id="allCategories" />
+            <Link to="/events/town">
+              <FormattedMessage id="allCities" />
             </Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
-        <BreadcrumbItem
-          key={eventCategoryData?.id ?? uuid()}
-          isCurrentPage
-          color="primary.500"
-        >
-          <Text>{eventCategoryData?.name}</Text>
-        </BreadcrumbItem>
+        {/* <BreadcrumbItem isCurrentPage color="primary.500">
+          {eventTownData?.name}
+        </BreadcrumbItem> */}
       </Breadcrumb>
 
       {/* form event creation  */}
-      <UpdateEventCatrgory key={uuid()} eventCategory={eventCategoryData} />
+      {/* <UpdateEventTown key={uuid()} eventTown={eventTownData} /> */}
+      <UpdateEventTown
+        key={uuid()}
+        eventTown={{
+          id: '09381e5e-6b65-4177-8c6e-7e54eed5de3a',
+          name: 'Alger',
+          image: null,
+          createdAt: 'dadaz',
+        }}
+      />
     </Stack>
   );
 };
 
-export default EditCategory;
+export default EditTown;

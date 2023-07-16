@@ -35,14 +35,14 @@ export type EventCategoryListItem = {
 export type EventTown = {
   id: string;
   name: string;
-  image: string;
+  image: string | null;
   createdAt: string;
 };
 
 export type EventTownListItem = {
   id: string;
   name: string;
-  image: string;
+  image: string | null;
   createdAt: string;
   consultData: {
     id: string;

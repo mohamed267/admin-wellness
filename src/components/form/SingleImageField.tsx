@@ -23,6 +23,7 @@ type InputFieldProps = FieldWrapperPassThroughProps & {
   inputStyle?: any;
   setValue?: any;
   name?: string;
+  defaultValue?: string | null;
   imageType: string;
 };
 
@@ -31,13 +32,16 @@ const SingleImageField = ({
   error,
   label,
   setValue = () => {},
+  defaultValue,
   name = 'media',
   imageType,
 }: InputFieldProps) => {
   // let uuid = 1
   const [black200] = useToken('colors', ['black.200']);
   const addRef = useRef<any>(null);
-  const [image, setImage] = useState<any>(null);
+  const [image, setImage] = useState<any>(
+    defaultValue ? { url: defaultValue, _old: true } : null,
+  );
 
   const [file, setFile] = useState<any>(null);
 
@@ -55,7 +59,9 @@ const SingleImageField = ({
   };
 
   useEffect(() => {
-    setValue(name, image);
+    if (!image?._old) {
+      setValue(name, image);
+    }
   }, [image]);
 
   return (
@@ -74,7 +80,7 @@ const SingleImageField = ({
             position={'relative'}
           >
             <Image
-              src={image?.url ?? null}
+              src={image?.url}
               h="100%"
               w="100%"
               objectFit={'cover'}

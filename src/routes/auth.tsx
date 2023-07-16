@@ -1,7 +1,14 @@
-import { AuthAdminRoutes } from 'features/authAdmin/routes';
+import { Center, Spinner } from '@chakra-ui/react';
 import { useUser } from 'lib/auth';
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+
+import { lazyImport } from 'utils/lazyImport';
+
+const { AuthAdminRoutes } = lazyImport(
+  () => import('features/authAdmin/routes'),
+  'AuthAdminRoutes',
+);
 
 const App = () => {
   const navigate = useNavigate();
@@ -21,7 +28,17 @@ const App = () => {
     }
   }, [user, navigate, location, isUserFetched]);
 
-  return <Outlet />;
+  return (
+    <Suspense
+      fallback={
+        <Center w="100vx" h="100vh">
+          <Spinner />
+        </Center>
+      }
+    >
+      <Outlet />
+    </Suspense>
+  );
 };
 
 export const authRoutes = [

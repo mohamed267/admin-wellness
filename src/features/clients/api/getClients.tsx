@@ -10,7 +10,7 @@ type ClientProps = { meta: Meta; clients: Client[] };
 
 export const getClients = async (): Promise<ClientProps> => {
   const clientsResponse = (await axios.get(
-    '/api/users/admin/clients',
+    '/year-structure-stage',
   )) as ClientResponseProps;
   const clients = extractClients(clientsResponse?.users as ClientResponse[]);
 

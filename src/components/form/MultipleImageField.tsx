@@ -54,7 +54,6 @@ const MultipleImageField = ({
     }));
     inputFiles && setFiles([...files, ...filesInstances]);
     fileInput.value = null;
-    console.log('files => ', fileInput?.files);
   };
   const handleImageUploaded = (url: string, id: string) => {
     setImages([...images, { url, type: 'image' }]);

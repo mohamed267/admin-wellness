@@ -1,8 +1,9 @@
 import { axios } from 'lib/axios';
 import { useMutation } from '@tanstack/react-query';
+import { UpdateTownDto } from 'features/events/dtos/towns';
 // import { useNotification } from 'stores/notification';
 
-export const useCreateTown = () => {
+export const useUpdateTown = () => {
   // const { addNotification } = useNotification();
 
   return useMutation({
@@ -22,12 +23,20 @@ export const useCreateTown = () => {
       // }
     },
     onSuccess: () => {},
-    mutationFn: createTown,
+    mutationFn: updateTown,
   });
 };
 
-export const createTown = async (data: any): Promise<any> => {
-  console.log('town data add is ', data);
-  const town = await axios.post(`/api/stores/add-town`, data);
+type UpdateTownProp = {
+  townId: string;
+  eventTownData: UpdateTownDto;
+};
+
+export const updateTown = async ({
+  townId,
+  eventTownData,
+}: UpdateTownProp): Promise<any> => {
+  console.log('updating her  ', townId, eventTownData);
+  const town = await axios.patch(`/api/stores/towns/${townId}`, eventTownData);
   return town;
 };

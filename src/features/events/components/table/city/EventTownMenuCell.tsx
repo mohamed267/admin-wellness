@@ -29,6 +29,7 @@ const EventTownMenuCell = ({ value }: any) => {
     {
       title: 'edit',
       Icon: EditPencil,
+      link: `/events/city/${value?.id}`,
     },
     {
       title: 'delete',

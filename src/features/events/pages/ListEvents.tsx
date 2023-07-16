@@ -20,14 +20,22 @@ import AddCategoryIcon from 'assets/icons/category/AddCategoryIcon';
 import AddCityIcon from 'assets/icons/city/AddCityIcon';
 
 const ListEvents = () => {
-  const [pageIndex, setPageIndex] = useState(1);
-  const { data: events } = useEvents({});
+  const [pageIndex, setPageIndex] = useState<number>(1);
+  const { data: events, refetch: refetchEvents } = useEvents({
+    query: {
+      page: pageIndex,
+    },
+  });
 
   useEffect(() => {
     if (events?.meta) {
       setPageIndex(events.meta.currentPage);
     }
   }, [events]);
+
+  useEffect(() => {
+    refetchEvents();
+  }, [pageIndex]);
 
   return (
     <Stack py="15px" spacing="10px">

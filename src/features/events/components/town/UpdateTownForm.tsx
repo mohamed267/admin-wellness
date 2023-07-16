@@ -6,11 +6,13 @@ import InputField from 'components/form/InputField';
 import Form from 'components/form/Form';
 import { FormattedMessage } from 'react-intl';
 import SingleImageField from 'components/form/SingleImageField';
-import { useCreateTown } from '../api/createTown';
 import { useNavigate } from 'react-router-dom';
+import { EventTown } from 'features/events/types';
+import uuid from 'react-uuid';
+import { useUpdateTown } from 'features/events/api/town';
 
 const schemaEvent = z.object({
-  name: z.any(),
+  name: z.string(),
   image: z.any(),
 });
 
@@ -19,32 +21,41 @@ type IEventForm = {
   image: Media;
 };
 
-const EventTownForm = () => {
+type UpdateEventTownProps = {
+  eventTown?: EventTown | null;
+};
+
+const UpdateEventTown = ({ eventTown }: UpdateEventTownProps) => {
   const navigate = useNavigate();
   const {
-    mutate: createTown,
-    isLoading: isCreatingTown,
-    isSuccess: isTownCreated,
-  } = useCreateTown();
+    mutate: updateTown,
+    isLoading: isUpdatingTown,
+    isSuccess: isTownUpdated,
+  } = useUpdateTown();
 
-  const handleAddTown = (townData: any) => {
-    const { image, ...data } = townData;
-    createTown({
-      ...data,
-      image: image?.url ?? '',
-    });
+  const handleUpdateTown = (categoryData: any) => {
+    const { image, ...data } = categoryData;
+    if (eventTown?.id) {
+      updateTown({
+        townId: eventTown?.id,
+        eventTownData: {
+          ...data,
+          image: image?.url ?? '',
+        },
+      });
+    }
   };
 
   useEffect(() => {
-    if (isTownCreated) {
+    if (isTownUpdated) {
       navigate('/events/city');
     }
-  }, [isTownCreated, navigate]);
+  }, [isTownUpdated, navigate]);
 
   return (
     <Form<IEventForm, typeof schemaEvent>
       schema={schemaEvent}
-      onSubmit={handleAddTown}
+      onSubmit={handleUpdateTown}
     >
       {({ register, formState, setValue }) => (
         <Stack spacing="20px">
@@ -53,6 +64,7 @@ const EventTownForm = () => {
             error={formState.errors['name']}
             label={'cityName'}
             placeholder=""
+            defaultValue={eventTown?.name}
             inputStyle={{
               variant: 'primary',
               fontSize: 'xs',
@@ -63,11 +75,13 @@ const EventTownForm = () => {
           />
 
           <SingleImageField
+            key={uuid()}
             registration={register('image')}
             setValue={setValue}
             name={'image'}
             imageType={'city'}
             label={'cityCover'}
+            defaultValue={eventTown?.image}
             inputStyle={{
               variant: 'primary',
               fontSize: 'sm',
@@ -84,7 +98,7 @@ const EventTownForm = () => {
             fontWeight="500"
             fontSize="18px"
             type="submit"
-            isLoading={isCreatingTown}
+            isLoading={isUpdatingTown}
           >
             <Text
               _firstLetter={{
@@ -100,4 +114,6 @@ const EventTownForm = () => {
   );
 };
 
-export default EventTownForm;
+UpdateEventTown.propTypes = {};
+
+export default UpdateEventTown;

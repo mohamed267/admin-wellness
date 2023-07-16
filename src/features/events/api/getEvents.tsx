@@ -4,14 +4,17 @@ import { axios } from 'lib/axios';
 import { Meta } from 'features/global';
 import { useQuery } from '@tanstack/react-query';
 import { extractEvents } from '../utils/extactData';
+import { GetEventQueryParam } from '../queryParams/get-event.queryParam';
 
 type EventResponseProps = { meta: Meta; events: EventResponse[] };
 type EventProps = { meta: Meta; events: Event[] };
 
-export const getEvents = async (): Promise<EventProps> => {
-  const eventsResponse = (await axios.get(
-    '/api/events/admin',
-  )) as EventResponseProps;
+export const getEvents = async (
+  query: GetEventQueryParam = {},
+): Promise<EventProps> => {
+  const eventsResponse = (await axios.get('/api/events/admin', {
+    params: query,
+  })) as EventResponseProps;
   const events = extractEvents(eventsResponse?.events as EventResponse[]);
 
   return { meta: eventsResponse?.meta, events };
@@ -21,12 +24,13 @@ type QueryFnType = typeof getEvents;
 
 export type UseUsersOptions = {
   config?: QueryConfig<QueryFnType>;
+  query?: GetEventQueryParam;
 };
 
-export const useEvents = ({ config }: UseUsersOptions) => {
+export const useEvents = ({ config, query }: UseUsersOptions) => {
   return useQuery<ExtractFnReturnType<QueryFnType>>({
     queryKey: ['events'],
-    queryFn: () => getEvents(),
+    queryFn: () => getEvents(query),
     ...config,
   });
 };
