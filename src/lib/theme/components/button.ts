@@ -25,7 +25,6 @@ export const buttonStyles = {
             filter: 'brightness(.95)',
           },
         }),
-
         primaryOutline: (props: any) => ({
           border: '1px solid',
           borderColor: mode('primary.500', 'primary.600')(props),
@@ -37,8 +36,10 @@ export const buttonStyles = {
           },
         }),
         dangerFill: (props: any) => ({
-          bg: mode('red.500', 'red.600')(props),
+          bg: mode('danger.500', 'danger.600')(props),
           color: 'white',
+          fill: 'white',
+          stroke: 'white',
           _hover: {
             filter: 'brightness(.95)',
           },
@@ -80,9 +81,23 @@ export const buttonStyles = {
         grayOutline: (props: any) => ({
           fontWeight: '500',
           color: mode('black.700', 'white')(props),
+          fill: mode('black.700', 'white')(props),
+          stroke: mode('black.700', 'white')(props),
           bg: mode('transparent', 'transparent')(props),
           border: '1px solid',
           borderColor: mode('gray.500', 'rgba(135, 140, 189, 0.3)')(props),
+          borderRadius: 'md',
+          _placeholder: { color: 'secondaryGray.600', fontWeight: '400' },
+          _hover: {
+            borderColor: mode('primary.500', 'primary.500')(props),
+          },
+        }),
+
+        grayTableUtils: (props: any) => ({
+          color: mode('black.200', 'white')(props),
+          fill: mode('black.200', 'white')(props),
+          stroke: 'none',
+          bg: mode('transparent', 'transparent')(props),
           borderRadius: 'md',
           _placeholder: { color: 'secondaryGray.600', fontWeight: '400' },
           _hover: {

@@ -1,5 +1,5 @@
 import { ExtractFnReturnType, QueryConfig } from 'lib/react-query';
-import { Event, EventResponse } from '../types';
+import { EventListEntity, EventResponse } from '../types';
 import { axios } from 'lib/axios';
 import { Meta } from 'features/global';
 import { useQuery } from '@tanstack/react-query';
@@ -7,7 +7,7 @@ import { extractEvents } from '../utils/extactData';
 import { GetEventQueryParam } from '../queryParams/get-event.queryParam';
 
 type EventResponseProps = { meta: Meta; events: EventResponse[] };
-type EventProps = { meta: Meta; events: Event[] };
+type EventProps = { meta: Meta; events: EventListEntity[] };
 
 export const getEvents = async (
   query: GetEventQueryParam = {},

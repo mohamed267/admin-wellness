@@ -39,7 +39,7 @@ export const inputStyles = {
             bg: mode('white', 'white')(props),
             border: '1px solid',
             borderColor: mode('gray.300', 'rgba(135, 140, 189, 0.3)')(props),
-            borderRadius: '16px',
+            borderRadius: '10px',
             boxShadow: 'xs',
             _placeholder: { color: 'gray.600', fontWeight: '400' },
             _hover: {
@@ -83,7 +83,7 @@ export const inputStyles = {
             bg: mode('white', 'white')(props),
             border: '1px solid',
             borderColor: mode('gray.300', 'rgba(135, 140, 189, 0.3)')(props),
-            borderRadius: '16px',
+            borderRadius: '10px',
             boxShadow: 'xs',
             _placeholder: { color: 'gray.600', fontWeight: '400' },
             _hover: {

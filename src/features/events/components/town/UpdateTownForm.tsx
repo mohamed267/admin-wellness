@@ -57,8 +57,9 @@ const UpdateEventTown = ({ eventTown }: UpdateEventTownProps) => {
       schema={schemaEvent}
       onSubmit={handleUpdateTown}
     >
-      {({ register, formState, setValue }) => (
+      {({ register, formState, setValue, watch }) => (
         <Stack spacing="20px">
+          <Text>{JSON.stringify(eventTown)}</Text>
           <InputField
             registration={register('name')}
             error={formState.errors['name']}
@@ -78,6 +79,7 @@ const UpdateEventTown = ({ eventTown }: UpdateEventTownProps) => {
             key={uuid()}
             registration={register('image')}
             setValue={setValue}
+            watch={watch}
             name={'image'}
             imageType={'city'}
             label={'cityCover'}

@@ -1,5 +1,7 @@
 import { axios } from 'lib/axios';
 import { useMutation } from '@tanstack/react-query';
+import { EventTimesPeriod } from '../types';
+import moment from 'moment';
 // import { useNotification } from 'stores/notification';
 
 export const useCreateEvent = () => {
@@ -27,6 +29,21 @@ export const useCreateEvent = () => {
 };
 
 export const createEvent = async (data: any): Promise<any> => {
-  const event = await axios.post(`/api/events`, data);
+  // adding 12 ours to timing to  gurantee  thet date is correcte
+  const eventData = {
+    ...data,
+    periods:
+      data?.periods?.map((period: EventTimesPeriod) => ({
+        ...period,
+        beginsIn: moment(period?.beginsIn)
+          .startOf('day')
+          .add(12, 'hour')
+          .toDate(),
+        endsIn: moment(period?.endsIn)
+          .add(12, 'hour')
+          .toDate(),
+      })) ?? [],
+  };
+  const event = await axios.post(`/api/events`, eventData);
   return event;
 };

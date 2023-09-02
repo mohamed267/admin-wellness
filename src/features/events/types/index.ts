@@ -1,15 +1,41 @@
-export type Event = {
+import { Media } from 'features/global';
+import { User } from 'features/users/types';
+import { EventTimesPeriod } from './timeInterval';
+
+export type ACTIVE = 'active';
+export type PENDING = 'pending';
+
+export type EventType = ACTIVE | PENDING;
+
+export type EventListEntity = {
   id: string;
   title: string;
   createdAt: any;
   category: string;
   price: number;
   // score: number,
-  status: 'pending' | 'active';
+  status: EventType;
   consultData: {
     id: string;
     eventTitle: string;
+    status: EventType;
   };
+};
+
+export type EventDetails = {
+  id: string;
+  title: string;
+  createdAt: any;
+  category: Category;
+  price: number;
+  latitude: string;
+  longtitude: string;
+  description: any;
+  // score: number,
+  status: 'pending' | 'active';
+  town: EventTown;
+  medias: Media[];
+  periods: EventTimesPeriod[];
 };
 
 // event categores
@@ -55,6 +81,7 @@ export type EventResponse = {
   createdAt: any;
   category: EventCategory | null;
   price: number;
+  owner: User;
   // score: number,
   status: 'pending' | 'active';
 };
@@ -83,3 +110,5 @@ export type Coupon = {
   promoCode: string;
   eventId: string;
 };
+
+export * from './timeInterval';

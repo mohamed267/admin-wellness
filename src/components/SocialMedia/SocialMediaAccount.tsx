@@ -1,13 +1,15 @@
 import { PropsWithChildren } from 'react';
 import { HStack, Text, Icon } from '@chakra-ui/react';
 //icons
-import { SiFacebook, SiTwitter, SiYoutube } from 'react-icons/si';
 import { AiFillLinkedin, AiOutlineInstagram } from 'react-icons/ai';
+import YoutubeIcon from 'assets/icons/socialLinks/YoutubeIcon';
+import FacebookIcon from 'assets/icons/socialLinks/FacebookIcon';
+import TwitterIcon from 'assets/icons/socialLinks/TwitterIcon';
 
 const icons: any = {
-  facebook: <SiFacebook />,
-  youtube: <SiYoutube />,
-  twitter: <SiTwitter />,
+  facebook: <FacebookIcon />,
+  youtube: <YoutubeIcon />,
+  twitter: <TwitterIcon />,
   linkedin: <AiFillLinkedin />,
   instagram: <AiOutlineInstagram />,
 };

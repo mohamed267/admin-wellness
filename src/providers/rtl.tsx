@@ -22,7 +22,7 @@ export function RtlProvider({ children }: RtlProps) {
   return (
     <DirectionContext.Provider
       value={{
-        dir,
+        dir: 'rtl',
       }}
     >
       <CacheProvider value={cache} children={children} />

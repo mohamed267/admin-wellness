@@ -2,6 +2,9 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from 'reportWebVitals';
 import './index.css';
+import '@wojtekmaj/react-timerange-picker/dist/TimeRangePicker.css';
+import 'react-clock/dist/Clock.css';
+import 'assets/css/TimeRangePicker.scss';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,

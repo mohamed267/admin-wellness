@@ -93,7 +93,14 @@ const FileUploadBox = ({
           <Stack flexGrow="1" gap="10px">
             <HStack justifyContent="space-between" alignItems="start">
               <Stack>
-                <Text color="gray.600" fontSize="xl" fontWeight="400">
+                <Text
+                  color="gray.600"
+                  noOfLines={1}
+                  fontSize="xl"
+                  fontWeight="400"
+                  maxW="200px"
+                  textOverflow="elipsis"
+                >
                   {file?.name}
                 </Text>
                 <Text textTransform="capitalize" color="gray.500">
@@ -115,7 +122,6 @@ const FileUploadBox = ({
                   stroke: 'red.500',
                 }}
                 onClick={cancelUpload}
-                // onClick={resetUpload}
               >
                 <BinDeleteIcon />
               </Icon>

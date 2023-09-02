@@ -6,7 +6,7 @@ import {
 } from 'react-hook-form';
 import { ZodTypeDef, ZodType } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ReactNode, useEffect } from 'react';
+import { ReactNode } from 'react';
 
 type FormProps<IFormValues extends FieldValues, Schema> = {
   children: (methods: UseFormReturn<IFormValues>) => ReactNode;
@@ -29,11 +29,6 @@ const Form = <
   const methods = useForm<IFormValues>({
     resolver: schema && zodResolver(schema),
   });
-
-  useEffect(() => {
-    console.log('methods = >', methods);
-  }, [methods]);
-
   return (
     <form onSubmit={methods.handleSubmit(onSubmit)}>
       <>{children(methods)}</>

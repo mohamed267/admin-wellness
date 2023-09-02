@@ -21,6 +21,7 @@ type FieldWrapperProps = {
   label?: string;
   error?: FieldError | undefined;
   required?: boolean;
+  wrapperStyles?: any;
 };
 
 export type FieldWrapperPassThroughProps = Omit<
@@ -33,12 +34,14 @@ const FieldWrapper = ({
   error,
   label,
   required = false,
+  wrapperStyles = {},
 }: FieldWrapperProps) => {
   const textColor = useColorModeValue('black.700', 'white');
   const brandStars = useColorModeValue('primary.500', 'primary.400');
   return (
     <FormControl
       // mb='24px'
+      {...wrapperStyles}
       isInvalid={error?.message !== undefined}
     >
       {label && (
@@ -84,7 +87,12 @@ const FieldWrapper = ({
               <HStack w="100%" alignItems="center">
                 <AiOutlineWarning />
 
-                <Text fontSize={'xs'}>
+                <Text
+                  _firstLetter={{
+                    textTransform: 'capitalize',
+                  }}
+                  fontSize={'xs'}
+                >
                   <FormattedMessage id={error?.message} />
                 </Text>
               </HStack>

@@ -89,7 +89,6 @@ const ListCoupons = () => {
         // selectRow={navigateOrderDetails}
         data={coupons?.coupons ?? []}
         tableColumns={couponsColumns}
-        setPageIndex={setPageIndex}
         pageIndex={pageIndex}
         pageCount={coupons?.meta?.totalPages ?? 1}
         hideSelection={true}

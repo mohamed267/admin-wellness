@@ -56,7 +56,7 @@ const UpdateEventCatrgory = ({ eventCategory }: UpdateEventCategoryProps) => {
       schema={schemaEvent}
       onSubmit={handleUpdateCategory}
     >
-      {({ register, formState, setValue }) => (
+      {({ register, formState, setValue, watch }) => (
         <Stack spacing="20px">
           <InputField
             registration={register('name')}
@@ -77,6 +77,7 @@ const UpdateEventCatrgory = ({ eventCategory }: UpdateEventCategoryProps) => {
             registration={register('image')}
             setValue={setValue}
             name={'image'}
+            watch={watch}
             imageType={'events'}
             label={'categoryIcon'}
             defaultValue={eventCategory?.image}

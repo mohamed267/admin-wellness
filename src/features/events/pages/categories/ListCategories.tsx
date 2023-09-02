@@ -15,7 +15,7 @@ import { useCategories } from 'features/events/api/getEventCategories';
 
 const ListCategories = () => {
   const { state } = useLocation();
-  const [pageIndex, setPageIndex] = useState(1);
+  const [pageIndex] = useState(1);
 
   // const  [ pageIndex, setPageIndex ] = useState(1)
   const { data: categories } = useCategories({
@@ -77,7 +77,6 @@ const ListCategories = () => {
         // selectRow={navigateOrderDetails}
         data={categories ?? []}
         tableColumns={categoryColumn}
-        setPageIndex={setPageIndex}
         pageIndex={pageIndex}
         pageCount={1}
         //

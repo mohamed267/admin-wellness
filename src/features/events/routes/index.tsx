@@ -2,6 +2,7 @@ import CustomLayouts from 'layouts/CustomLayout/CustomLayouts';
 import { Route, Routes } from 'react-router-dom';
 import ListEvents from '../pages/ListEvents';
 import NewEvent from '../pages/NewEvent';
+import EditEvent from '../pages/EditEvent';
 import NewCategory from '../pages/categories/NewCategory';
 import NewTown from '../pages/towns/NewTown';
 import ListCoupons from '../pages/coupons/ListCoupons';
@@ -28,9 +29,12 @@ export const EventsRoutes = () => {
           <Route path="" element={<ListTowns />} />
           <Route path="new" element={<NewTown />} />
         </Route>
-        <Route path=":eventId/coupons/">
-          <Route path="" element={<ListCoupons />} />
-          <Route path="new" element={<NewCoupon />} />
+        <Route path=":eventId">
+          <Route path="coupons">
+            <Route path="" element={<ListCoupons />} />
+            <Route path="new" element={<NewCoupon />} />
+          </Route>
+          <Route path="" element={<EditEvent />} />
         </Route>
 
         <Route path="" element={<ListEvents />} />

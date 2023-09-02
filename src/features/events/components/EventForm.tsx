@@ -1,49 +1,77 @@
 import { useEffect } from 'react';
 import { z } from 'zod';
-import { Button, HStack, Stack, Text } from '@chakra-ui/react';
+import { Button, HStack, Flex, Text } from '@chakra-ui/react';
 import Form from 'components/form/Form';
 import InputField from 'components/form/InputField';
 import TextEditorfield from 'components/form/TextEditorfield';
 import SelectAsyncFieldComponent from 'components/form/SelectAsyncFieldComponent';
 import { searchEventCategories } from 'features/global/api/searchEventCategories';
 import { searchTowns } from 'features/global/api/searchTowns';
-import NumberInputFieldComponent from 'components/form/NumberInputField';
 import MultipleImageField from 'components/form/MultipleImageField';
 import { Media } from 'features/global';
-import MultipleVideoField from 'components/form/MultipleVideoField';
+// import MultipleVideoField from 'components/form/MultipleVideoField';
 import { FormattedMessage } from 'react-intl';
-import CalandarRangeField from 'components/form/CalandarRangeField';
+// import CalandarRangeField from 'components/form/CalandarRangeField';
 
 import { useCreateEvent } from '../api/createEvent';
 import { useNavigate } from 'react-router-dom';
+import CalendarRange from './form/CalendarRange';
+import TimePeriods from './form/TimePeriods';
+import TimeIntervalls from './form/TimeIntervalls';
+import { extractLatLongFromGoogleMapsUrl } from 'utils/map';
+import { safingEditorOutput } from 'utils/editor';
+// import EventTimesIntervalesField from 'components/form/EventTimesIntervalesField';
+
+const mapsLinkPattern = /@(-?\d+\.\d+),(-?\d+\.\d+)/;
 
 const schemaEvent = z.object({
-  title: z.any(),
-  maxNbPlaces: z.string(),
+  title: z.string(),
   description: z.any(),
-  category: z.any(),
-  town: z.any(),
-  price: z.string(),
+  category: z.any().refine(
+    (value) => {
+      return value?.name !== undefined;
+    },
+    {
+      message: 'categoryShouldBeProvided',
+    },
+  ),
+  town: z.any().refine(
+    (value) => {
+      return value?.name !== undefined;
+    },
+    {
+      message: 'townShouldBeProvided',
+    },
+  ),
   images: z.any(),
-  videos: z.any(),
+  mapsLink: z.string().refine((value) => mapsLinkPattern.test(value), {
+    message: 'invalidGoogleMapLink',
+  }),
+  // videos: z.any(),
   rangeBooking: z.any(),
+  timingIntervalls: z.any(),
+  selecetdRange: z.any(),
+  periods: z.any(),
 });
 
 type IEventForm = {
   title: string;
-  maxNbPlaces: string;
+  selecetdRange: any;
+  mapsLink: string;
   description: any;
   category: any;
   town: any;
-  price: string;
   images: Media[];
-  videos: Media[];
+  // videos: Media[];
   rangeBooking: any;
+  timingIntervalls: any;
+  periods: any;
 };
 
 const EventForm = () => {
   const navigate = useNavigate();
   const {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     mutate: createEvent,
     isLoading: isCreatingEvent,
     isSuccess: isEventCreated,
@@ -55,31 +83,30 @@ const EventForm = () => {
     }
   }, [isEventCreated, navigate]);
 
-  const handleCreateEvent = async (eventData: any) => {
+  const handleCreateEvent = async (eventData: IEventForm) => {
     const {
       images,
-      rangeBooking,
+      periods,
       town,
       category,
-      videos,
-      price,
-      maxNbPlaces,
+      // videos,
+      mapsLink,
+      description,
       ...snapData
     } = eventData;
 
-    const medias = [...images, videos];
+    const medias = [...images];
+    const address = extractLatLongFromGoogleMapsUrl(mapsLink);
 
     const data = {
       ...snapData,
       medias,
       town: town?.name ?? '',
       category: category?.name ?? '',
-      beginsIn: rangeBooking?.[0]?.startDate,
-      endsIn: rangeBooking?.[0]?.endDate,
-      maxNbPlaces: Number(maxNbPlaces) ?? 0,
-      price: Number(price) ?? 0,
+      periods: periods ?? [],
+      description: JSON.stringify(safingEditorOutput(description)),
+      ...address,
     };
-    console.log('our data her is ', data);
 
     createEvent(data);
   };
@@ -89,14 +116,13 @@ const EventForm = () => {
       schema={schemaEvent}
       onSubmit={handleCreateEvent}
     >
-      {({ register, formState, setValue }) => (
-        <Stack spacing="20px">
+      {({ register, formState, setValue, watch }) => (
+        <Flex flexDirection="column" gap="20px">
           <HStack>
             <InputField
               registration={register('title')}
               error={formState.errors['title']}
               label={'eventTilte'}
-              placeholder=""
               inputStyle={{
                 variant: 'primary',
                 fontSize: 'xs',
@@ -105,12 +131,10 @@ const EventForm = () => {
               }}
             />
 
-            <NumberInputFieldComponent
-              registration={register('maxNbPlaces')}
-              error={formState.errors['maxNbPlaces']}
-              label={'numberPlaces'}
-              setValue={setValue}
-              placeholder=""
+            <InputField
+              registration={register('mapsLink')}
+              error={formState.errors['mapsLink']}
+              label={'mapsLink'}
               inputStyle={{
                 variant: 'primary',
                 fontSize: 'xs',
@@ -127,7 +151,7 @@ const EventForm = () => {
             label={'description'}
             placeholder=""
             w="100%"
-            h="300px"
+            h="200px"
           />
 
           <HStack justifyContent="space-between" columnGap="10px">
@@ -166,40 +190,51 @@ const EventForm = () => {
                 borderColor: 'gray.500',
               }}
             />
-
-            <NumberInputFieldComponent
-              registration={register('price')}
-              error={formState.errors['price']}
-              setValue={setValue}
-              label={'price'}
-              placeholder=""
-              inputStyle={{
-                variant: 'primary',
-                fontSize: 'xs',
-                size: 'lg',
-                fontWeight: 'normal',
-              }}
-            />
           </HStack>
 
-          <CalandarRangeField
-            registration={register('rangeBooking')}
-            label={'validDateBooking'}
-            setValue={setValue}
-            // defaultValue={}
+          {/* <EventTimesIntervalesField
+            registration={register('timingIntervalls')}
+            buttonStyle={{
+              variant: 'primaryFill',
+              w: 'fit-content',
+              borderRadius: 'xl',
+              lineHeight: '21px',
+              fontWeight: '500',
+              fontSize: '18px',
+            }}
             inputStyle={{
               variant: 'primary',
               fontSize: 'xs',
               size: 'lg',
               fontWeight: 'normal',
-              w: '600px',
             }}
-          />
-
-          <MultipleImageField
-            registration={register('images')}
+          /> */}
+          <Flex gap="20px">
+            <CalendarRange
+              setValue={setValue}
+              watch={watch}
+              name={'selecetdRange'}
+              selectedIntervalsName="selectedIntervals"
+              periodsName="periods"
+            />
+            <TimeIntervalls
+              setValue={setValue}
+              watch={watch}
+              name={'selectedIntervals'}
+            />
+          </Flex>
+          <TimePeriods
             setValue={setValue}
-            defaultValue={[]}
+            name={'periods'}
+            watch={watch}
+            selectedIntervalsName="selectedIntervals"
+            selectedPeriodName="selecetdRange"
+          />
+          <MultipleImageField
+            // registration={register('images')}
+            key={'image-upload-media'}
+            setValue={setValue}
+            watch={watch}
             name={'images'}
             imageType={'events'}
             label={'images'}
@@ -211,7 +246,7 @@ const EventForm = () => {
             }}
           />
 
-          <MultipleVideoField
+          {/* <MultipleVideoField
             registration={register('videos')}
             setValue={setValue}
             defaultValue={[]}
@@ -224,7 +259,7 @@ const EventForm = () => {
               size: 'lg',
               fontWeight: 600,
             }}
-          />
+          /> */}
 
           <Button
             variant="primaryFill"
@@ -244,7 +279,7 @@ const EventForm = () => {
               <FormattedMessage id="add" />
             </Text>
           </Button>
-        </Stack>
+        </Flex>
       )}
     </Form>
   );

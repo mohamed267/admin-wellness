@@ -21,7 +21,7 @@ const Editor = ({ data, onChange, holder }: Props) => {
     if (!ref.current) {
       const editor = new EditorJS({
         holder: holder,
-        tools: EDITOR_TOOLS,
+        tools: EDITOR_TOOLS as any,
         data,
         async onChange(api: any) {
           const data = await api.saver.save();

@@ -16,30 +16,48 @@ import TableMenuIcon from 'assets/icons/table/TableMenuIcon';
 import EditPencil from 'assets/icons/table/EditPencil';
 import DeleteBinTableIcon from 'assets/icons/table/DeleteBinTableIcon';
 import PauseTableIcon from 'assets/icons/table/PauseTableIcon';
-import CouponsIcon from 'assets/icons/event/CouponsIcon';
 import StatisticsIcon from 'assets/icons/table/StatisticsIcon';
-import { useDeleteEvent } from 'features/events/api/deleteEvent';
-import { defaultFn } from 'utils/functions';
+import { useDeleteEvents } from 'features/events/api/deleteEvents';
+import CouponsIcon from 'assets/icons/event/CouponsIcon';
+import { EventType } from 'features/events/types';
 import { Link } from 'react-router-dom';
+import { defaultFn } from 'utils/functions';
+import { FormattedMessage } from 'react-intl';
+import { useActivateEvents } from 'features/events/api/activateEvents';
+import { useBanEvents } from 'features/events/api/banEvents';
 
-const EventMenuCell = ({ value }: any) => {
-  const { mutate: deleteEvent } = useDeleteEvent();
+type EventMenuCellProps = {
+  value: { id: string; eventTitle: string; status: EventType };
+};
+
+const EventMenuCell = ({ value }: EventMenuCellProps) => {
+  const { mutate: deleteEvents } = useDeleteEvents();
+  const { mutate: banEvents } = useBanEvents();
+  const { mutate: activateEvents } = useActivateEvents();
 
   const menuItems: TableMenuItem[] = [
     {
       title: 'edit',
       Icon: EditPencil,
+      link: `/events/${value?.id}`,
     },
     {
       title: 'delete',
       Icon: DeleteBinTableIcon,
       onClick: () => {
-        deleteEvent({ eventId: value?.id });
+        deleteEvents([value?.id]);
       },
     },
     {
-      title: 'pause',
+      title: value.status === 'pending' ? 'activate' : 'pause',
       Icon: PauseTableIcon,
+      onClick: () => {
+        if (value?.status === 'pending') {
+          activateEvents([value?.id]);
+        } else {
+          banEvents([value?.id]);
+        }
+      },
     },
     {
       title: 'coupons',
@@ -86,7 +104,7 @@ const EventMenuCell = ({ value }: any) => {
                       color="gray.800"
                     >
                       {' '}
-                      {item?.title}{' '}
+                      <FormattedMessage id={item?.title} />{' '}
                     </Text>
                   </MenuItem>
                 </Link>

@@ -16,7 +16,7 @@ const CustomLayouts = () => {
           md: '250px',
         }}
       >
-        <Stack px="30px" py="30px">
+        <Stack px="30px" py="30px" spacing="30px">
           <HStack justifyContent="space-between">
             <SearchBar width={'600px'} placeholder="Search" />
 

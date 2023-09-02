@@ -1,13 +1,10 @@
-import { useState } from 'react';
 import { Button, HStack, Icon, Stack, Text } from '@chakra-ui/react';
 import { Link, useLocation } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import CustomBreadcrumb from 'components/CustomBreadcrumb/CustomBreadcrumb';
-import TableComponent from 'components/table/Table';
-import { EventTown } from 'features/events/types';
-import { townColumn } from 'features/events/variables/table';
+
 import CouponsIcon from 'assets/icons/event/CouponsIcon';
-import { useTowns } from 'features/events/api/getEventTowns';
+import TownsList from 'features/events/components/town/TownsList';
 // import { useCoupons } from '../api/getCoupons'
 // import TableComponent from 'components/table/Table'
 // import { Coupon } from '../types'
@@ -15,12 +12,6 @@ import { useTowns } from 'features/events/api/getEventTowns';
 
 const ListTowns = () => {
   const { state } = useLocation();
-  const [pageIndex, setPageIndex] = useState(1);
-
-  // const  [ pageIndex, setPageIndex ] = useState(1)
-  const { data: towns } = useTowns({
-    query: {},
-  });
 
   //   useEffect(()=>{
   //     if(coupons?.meta){
@@ -71,19 +62,7 @@ const ListTowns = () => {
           </Link>
         </HStack>
       </HStack>
-      <TableComponent<EventTown>
-        name="towns"
-        // name="users"
-        // selectRow={navigateOrderDetails}
-        data={towns ?? []}
-        tableColumns={townColumn}
-        setPageIndex={setPageIndex}
-        pageIndex={pageIndex}
-        pageCount={1}
-        //
-        // searching={setSearch}
-        // detailsIcon={true}
-      />
+      <TownsList />
     </Stack>
   );
 };

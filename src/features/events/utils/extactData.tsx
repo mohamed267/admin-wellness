@@ -1,15 +1,22 @@
+import moment from 'moment';
 import {
   Coupon,
   CouponResponse,
-  Event,
   EventCategory,
   EventCategoryListItem,
+  EventDetails,
+  EventListEntity,
   EventResponse,
+  EventTimesPeriod,
   EventTown,
   EventTownListItem,
 } from '../types';
+import { Media } from 'features/global';
+import { joinEventImage } from 'utils/images';
 
-export const extractEvents = (eventRespose: EventResponse[]): Event[] => {
+export const extractEvents = (
+  eventRespose: EventResponse[],
+): EventListEntity[] => {
   return (
     eventRespose?.map((event: EventResponse) => ({
       id: event?.id,
@@ -17,13 +24,32 @@ export const extractEvents = (eventRespose: EventResponse[]): Event[] => {
       createdAt: event?.createdAt ?? '',
       category: event?.category?.name ?? '',
       price: event?.price ?? 0.0,
-      status: 'pending',
+      status: event.status,
+      publisher: event?.owner?.displayName,
       consultData: {
         id: event?.id ?? '',
         eventTitle: event?.title ?? '',
+        status: event?.status,
       },
     })) ?? []
   );
+};
+
+export const extractEvent = (eventRespose: EventDetails): EventDetails => {
+  return {
+    ...eventRespose,
+    medias:
+      eventRespose?.medias?.map((media: Media) => ({
+        ...media,
+        url: joinEventImage(media?.url),
+      })) ?? [],
+    periods:
+      eventRespose?.periods?.map((period: EventTimesPeriod) => ({
+        ...period,
+        beginsIn: moment(period?.beginsIn).toDate(),
+        endsIn: moment(period?.endsIn).toDate(),
+      })) ?? [],
+  };
 };
 
 export const extactEventCategories = (

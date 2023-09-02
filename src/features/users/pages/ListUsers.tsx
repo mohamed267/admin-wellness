@@ -40,7 +40,6 @@ const ListUsers = () => {
           // selectRow={navigateOrderDetails}
           data={usersData?.users ?? []}
           tableColumns={usersColumns}
-          setPageIndex={() => {}}
           pageIndex={1}
           pageCount={10}
           // searching={setSearch}

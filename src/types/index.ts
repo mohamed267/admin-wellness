@@ -12,7 +12,7 @@ export type SideBarItem = {
 };
 
 export type CellProps = {
-  value: string;
+  value: any;
 };
 
 export type TableMenuItem = {

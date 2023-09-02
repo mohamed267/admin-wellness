@@ -4,42 +4,53 @@ import {
   Box,
   Center,
   Circle,
+  // Circle,
   Flex,
   Icon,
   Image,
+  // Image,
   Input,
   Stack,
   useToken,
 } from '@chakra-ui/react';
 import { UseFormRegisterReturn } from 'react-hook-form';
 
-import { RiDeleteBin7Fill } from 'react-icons/ri';
+// import { RiDeleteBin7Fill } from 'react-icons/ri';
 import FileUploadBox from './FileUploadBox';
 import ImageUploadIcon from 'assets/icons/uploads/imageUploadIcon';
 import uuid from 'react-uuid';
 import If from 'common/If';
+import { defaultFn } from 'utils/functions';
+import { RiDeleteBin7Fill } from 'react-icons/ri';
 
 type InputFieldProps = FieldWrapperPassThroughProps & {
-  registration: Partial<UseFormRegisterReturn>;
+  registration?: Partial<UseFormRegisterReturn>;
   inputStyle?: any;
   setValue?: any;
   defaultValue?: any;
   name?: string;
   imageType: string;
+  nameDeleted?: string;
+  watch?: any;
 };
 
 const MultipleImageField = ({
-  registration,
+  // registration,
   error,
   label,
   setValue = () => {},
   defaultValue = [],
-  name = 'media',
+  name = 'medias',
+  nameDeleted = 'deletedMedias',
   imageType,
+  watch = defaultFn,
 }: InputFieldProps) => {
   const [black200] = useToken('colors', ['black.200']);
+  // const deletedImages = watch?.(nameDeleted);
+  const images = watch?.(name) ?? [];
+  const deletedImages = watch?.(nameDeleted);
   const addRef = useRef<any>(null);
-  const [images, setImages] = useState<any>(defaultValue);
+  // const [images, setImages] = useState<any>(defaultValue);
   const [filesUploaded, setFilesUploaded] = useState<string[]>([]);
 
   const [files, setFiles] = useState<any>([]);
@@ -53,19 +64,31 @@ const MultipleImageField = ({
       id: uuid(),
     }));
     inputFiles && setFiles([...files, ...filesInstances]);
-    fileInput.value = null;
+    // fileInput.value = null;
   };
   const handleImageUploaded = (url: string, id: string) => {
-    setImages([...images, { url, type: 'image' }]);
+    console.log('uploaded here => ', images);
+    setValue(name, [
+      ...images,
+      { id: uuid(), url, type: 'image', isNew: true },
+    ]);
     setFilesUploaded([...filesUploaded, id]);
   };
-  const deleteImage = (index: any) => {
-    setImages(images.filter((image: any, key: any) => index !== key));
+  const deleteImage = (deletedImage: any) => {
+    const newImages = images.filter(
+      (image: any) => deletedImage?.id !== image?.id,
+    );
+    setValue?.(name, newImages);
+    if (!deletedImage.isNew) {
+      setValue(nameDeleted, [...(deletedImages ?? []), deletedImage]);
+    }
   };
 
   useEffect(() => {
-    setValue(name, images);
-  }, [images]);
+    if (defaultValue) {
+      name && setValue?.(name, defaultValue);
+    }
+  }, []);
 
   return (
     <FieldWrapper error={error} label={label}>
@@ -75,45 +98,6 @@ const MultipleImageField = ({
         rowGap={{ base: 5, lg: 30 }}
         flexWrap="wrap"
       >
-        {images.map((image: any, key: any) => {
-          return (
-            <Center
-              key={key}
-              w={{ base: 120, lg: 150 }}
-              h={{ base: 120, lg: 130 }}
-              cursor="pointer"
-              borderRadius="3xl"
-              position={'relative'}
-            >
-              <Image
-                src={image?.url ?? null}
-                h="100%"
-                w="100%"
-                objectFit={'cover'}
-                borderRadius={'xl'}
-              />
-              <Circle
-                position={'absolute'}
-                top={3}
-                left={3}
-                bg="red.500"
-                borderRadius={'full'}
-                fontSize="xl"
-                color="white"
-                size={8}
-                _hover={{
-                  filter: 'brightness(.85)',
-                }}
-                onClick={() => {
-                  deleteImage(key);
-                }}
-              >
-                <RiDeleteBin7Fill />
-              </Circle>
-            </Center>
-          );
-        })}
-
         <Center
           border="2px solid"
           borderColor={`${black200} !important`}
@@ -131,7 +115,7 @@ const MultipleImageField = ({
             w="100%"
             opacity={0}
             cursor="pointer"
-            {...registration}
+            // {...registration}
             onChange={addFiles}
             multiple={true}
             ref={addRef}
@@ -142,6 +126,51 @@ const MultipleImageField = ({
             </Icon>
           </Stack>
         </Center>
+        {images?.map((image: any, key: any) => {
+          return (
+            <If
+              condition={
+                true
+                // !deletedImages?.some((filt: any) => filt?.id === image?.id)
+              }
+            >
+              <Center
+                key={key}
+                w={{ base: 120, lg: 150 }}
+                h={{ base: 120, lg: 130 }}
+                cursor="pointer"
+                borderRadius="3xl"
+                position={'relative'}
+              >
+                <Image
+                  src={image?.url ?? null}
+                  h="100%"
+                  w="100%"
+                  objectFit={'cover'}
+                  borderRadius={'xl'}
+                />
+                <Circle
+                  position={'absolute'}
+                  top={3}
+                  left={3}
+                  bg="red.500"
+                  borderRadius={'full'}
+                  fontSize="xl"
+                  color="white"
+                  size={8}
+                  _hover={{
+                    filter: 'brightness(.85)',
+                  }}
+                  onClick={() => {
+                    deleteImage(image);
+                  }}
+                >
+                  <RiDeleteBin7Fill />
+                </Circle>
+              </Center>
+            </If>
+          );
+        })}
       </Flex>
       <Box>
         {files.map((file: any, key: any) => (

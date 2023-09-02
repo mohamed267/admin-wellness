@@ -8,18 +8,29 @@ import { useLogin } from 'lib/auth';
 const schemaAdminLogin = z.object({
   phoneNumber: z.any(),
   password: z.string(),
+  countryCode: z.string(),
 });
 
 type IAdminLoginForm = {
   phoneNumber: string;
   password: string;
+  countryCode: string;
 };
 
 const AdminLoginForm = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { mutate: loginAdmin } = useLogin();
 
   const handleAdminLogin = async (loginData: any) => {
-    loginAdmin(loginData);
+    const phoneNumber = `+${loginData?.countryCode}${loginData.phoneNumber}`;
+    console.log('dta is  ', {
+      phoneNumber,
+      password: loginData.password,
+    });
+    loginAdmin({
+      phoneNumber,
+      password: loginData.password,
+    });
   };
 
   return (
@@ -43,6 +54,7 @@ const AdminLoginForm = () => {
           <PhoneNumberInputField
             registration={register('phoneNumber')}
             error={formState.errors['phoneNumber']}
+            countryCodeName="countryCode"
             name="phone"
             setValue={setValue}
             label={'phoneNumber'}
@@ -65,6 +77,7 @@ const AdminLoginForm = () => {
               fontSize: 'xs',
               size: 'lg',
               fontWeight: 'normal',
+              autocomplete: 'off',
             }}
           />
 

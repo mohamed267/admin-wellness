@@ -63,6 +63,17 @@ const MultipleVideoField = ({
         rowGap={{ base: 5, lg: 30 }}
         flexWrap="wrap"
       >
+        {/* <video width="750" height="500">
+          <source src="C:/Users/j/Downloads/vid.mp4" type="video/mp4" />
+        </video> */}
+        <iframe
+          width={300}
+          height={200}
+          allow="autoplay"
+          src="C:/Users/j/Downloads/vid.mp4"
+          // type="video/mp4"
+          title="videolabone"
+        ></iframe>
         {files.map((file: any, key: any) => (
           <VideoUploadBox
             file={file}

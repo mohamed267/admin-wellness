@@ -1,0 +1,43 @@
+.primary.react-timerange-picker{
+  height: 2.5rem;
+  .react-timerange-picker__wrapper{
+      background-color: white;
+      border-radius: 10px;
+      padding-left: 5px;
+      padding-right: 5px;
+      font-weight: 500;
+      color: var(--chakra-colors-black-900);
+      border: 1px solid;
+      border-color: var(--chakra-colors-gray-300);
+  }
+  &.react-timerange-picker--open{
+    .react-timerange-picker__wrapper{
+      
+      border: 1px solid;
+      border-color: var(--chakra-colors-primary-500);
+        
+    }
+  }
+
+  .react-timerange-picker__clock{
+    display: none;
+  }
+  .react-timerange-picker__inputGroup{
+    display: flex;
+    align-items: center;
+
+    .react-timerange-picker__inputGroup__input{
+      // width: 30px !important;
+      padding: 1px;
+      width: 26px !important;
+      text-align: center;
+      height: fit-content !important;
+      border-radius: 5px;
+      &:focus-visible{
+        border: 1px solid !important;
+        outline:  1px solid var(--chakra-colors-primary-500) !important;
+      }
+    }
+  }
+
+}

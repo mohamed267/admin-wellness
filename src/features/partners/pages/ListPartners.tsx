@@ -24,7 +24,7 @@ type ListPartnersProps = {
 };
 
 const ListPartners = ({ type = 'organizer' }: ListPartnersProps) => {
-  const [pageIndex, setPageIndex] = useState(1);
+  const [pageIndex] = useState(1);
   const { data: partners } = usePartners({
     query: {
       filterBy: type,
@@ -122,7 +122,6 @@ const ListPartners = ({ type = 'organizer' }: ListPartnersProps) => {
         // selectRow={navigateOrderDetails}
         data={partners?.partners ?? []}
         tableColumns={partnersColumns}
-        setPageIndex={setPageIndex}
         pageIndex={pageIndex}
         pageCount={partners?.meta?.totalPages ?? 1}
         //

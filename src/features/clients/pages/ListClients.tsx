@@ -8,7 +8,7 @@ import { Client } from '../types';
 import { clientsColumns } from '../variables/table';
 
 const ListClients = () => {
-  const [pageIndex, setPageIndex] = useState(1);
+  const [pageIndex] = useState(1);
   const { data: clients } = useClients({});
 
   const breadItems = [
@@ -114,7 +114,6 @@ const ListClients = () => {
         // selectRow={navigateOrderDetails}
         data={clients?.clients ?? []}
         tableColumns={clientsColumns}
-        setPageIndex={setPageIndex}
         pageIndex={pageIndex}
         pageCount={clients?.meta?.totalPages ?? 1}
         //

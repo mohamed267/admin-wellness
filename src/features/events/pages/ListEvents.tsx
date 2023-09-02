@@ -8,8 +8,8 @@ import {
   Text,
 } from '@chakra-ui/react';
 import TableComponent from 'components/table/Table';
-import { Link } from 'react-router-dom';
-import { Event } from '../types';
+import { Link, useSearchParams } from 'react-router-dom';
+import { EventListEntity } from '../types';
 
 import { eventsColumns } from '../variables/table';
 import NewEvent from 'assets/icons/event/newEvent';
@@ -18,12 +18,15 @@ import { useEvents } from '../api/getEvents';
 import { useEffect, useState } from 'react';
 import AddCategoryIcon from 'assets/icons/category/AddCategoryIcon';
 import AddCityIcon from 'assets/icons/city/AddCityIcon';
+import EventUtils from '../components/table/EventUtils';
 
 const ListEvents = () => {
   const [pageIndex, setPageIndex] = useState<number>(1);
+  const [searchParams] = useSearchParams();
   const { data: events, refetch: refetchEvents } = useEvents({
     query: {
-      page: pageIndex,
+      page: Number(searchParams?.get('page') ?? 1),
+      limit: 8,
     },
   });
 
@@ -35,7 +38,7 @@ const ListEvents = () => {
 
   useEffect(() => {
     refetchEvents();
-  }, [pageIndex]);
+  }, [searchParams]);
 
   return (
     <Stack py="15px" spacing="10px">
@@ -142,15 +145,16 @@ const ListEvents = () => {
         </HStack>
       </HStack>
 
-      <TableComponent<Event>
+      <TableComponent<EventListEntity>
         name="events"
         // name="users"
         // selectRow={navigateOrderDetails}
         data={events?.events ?? []}
         tableColumns={eventsColumns}
-        setPageIndex={setPageIndex}
         pageIndex={pageIndex}
         pageCount={events?.meta?.totalPages ?? 1}
+        paginated={true}
+        TableUtils={EventUtils}
         //
         // searching={setSearch}
         // detailsIcon={true}

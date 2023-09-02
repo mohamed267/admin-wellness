@@ -1,18 +1,17 @@
-import { HStack, Icon, IconButton, Text } from '@chakra-ui/react';
+import { HStack, Icon, IconButton, LinkBox, Text } from '@chakra-ui/react';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
-import { useDirectionContext } from 'contexts/directionContext';
 import If from 'common/If';
 import Page from './Page';
+import { useDirection } from 'hooks/useDirection';
+import { Link } from 'react-router-dom';
 
 type PaginationProps = {
   page: number;
   pages: number;
-  setPage: any;
 };
 
-const Pagination = ({ page, pages, setPage }: PaginationProps) => {
-  const { dir } = useDirectionContext();
-
+const Pagination = ({ page, pages }: PaginationProps) => {
+  const { dir } = useDirection();
   // const handleChangePage = (e: FormEvent<HTMLFormElement>) => {
   //   e.preventDefault();
   //   setPage(pageRef.current.value);
@@ -20,21 +19,24 @@ const Pagination = ({ page, pages, setPage }: PaginationProps) => {
 
   return (
     <HStack gap={'5px'}>
-      <IconButton
-        aria-label="previous icon"
-        variant="whiteFill"
-        icon={
-          <Icon
-            as={dir === 'ltr' ? AiOutlineLeft : AiOutlineRight}
-            cursor={'pointer'}
-            onClick={() => setPage(page - 1)}
+      <LinkBox>
+        <Link to={`?page=${page - 1}`}>
+          <IconButton
+            aria-label="previous icon"
+            variant="whiteFill"
+            icon={
+              <Icon
+                as={dir === 'ltr' ? AiOutlineLeft : AiOutlineRight}
+                cursor={'pointer'}
+              />
+            }
           />
-        }
-      />
+        </Link>
+      </LinkBox>
 
       <If condition={page - 2 > 1}>
         <>
-          <Page setPage={setPage} offsetPage={1} page={page} />
+          <Page offsetPage={1} page={page} />
 
           <IconButton
             aria-label={`page ${1} `}
@@ -43,7 +45,7 @@ const Pagination = ({ page, pages, setPage }: PaginationProps) => {
           />
           {[page, page + 1, page + 2].map((offsetPage: number, key: any) => (
             <If key={key} condition={offsetPage <= pages}>
-              <Page setPage={setPage} offsetPage={offsetPage} page={page} />
+              <Page offsetPage={offsetPage} page={page} />
             </If>
           ))}
         </>
@@ -53,7 +55,7 @@ const Pagination = ({ page, pages, setPage }: PaginationProps) => {
         <>
           {[1, 2, 3].map((offsetPage: number, key: any) => (
             <If key={key} condition={offsetPage <= pages}>
-              <Page setPage={setPage} offsetPage={offsetPage} page={page} />
+              <Page offsetPage={offsetPage} page={page} />
             </If>
           ))}
         </>
@@ -66,21 +68,24 @@ const Pagination = ({ page, pages, setPage }: PaginationProps) => {
             variant="whiteFill"
             icon={<Text>...</Text>}
           />
-          <Page setPage={setPage} offsetPage={pages} page={page} />
+          <Page offsetPage={pages} page={page} />
         </>
       </If>
 
-      <IconButton
-        aria-label="next page icon"
-        variant="whiteFill"
-        icon={
-          <Icon
-            as={dir === 'ltr' ? AiOutlineRight : AiOutlineLeft}
-            cursor="pointer"
-            onClick={() => setPage(page + 1)}
+      <LinkBox>
+        <Link to={`?page=${page + 1}`}>
+          <IconButton
+            aria-label="next page icon"
+            variant="whiteFill"
+            icon={
+              <Icon
+                as={dir === 'ltr' ? AiOutlineRight : AiOutlineLeft}
+                cursor="pointer"
+              />
+            }
           />
-        }
-      />
+        </Link>
+      </LinkBox>
     </HStack>
   );
 };

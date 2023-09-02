@@ -5,37 +5,28 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
-  Text,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  Menu,
-  HStack,
+  // Text,
   InputRightElement,
 } from '@chakra-ui/react';
-import Flag from 'react-country-flag';
 import { UseFormRegisterReturn } from 'react-hook-form';
 import FieldWrapper, { FieldWrapperPassThroughProps } from './FieldWrapper';
-import { inputStyles } from 'lib/theme/components/input';
-import usePhoneNumber from 'hooks/usePhoneNumber';
 import Switcher from 'common/Switcher';
-import { FormattedMessage } from 'react-intl';
-import If from 'common/If';
-
+import { useIntl } from 'react-intl';
+import usePhoneNumber from 'hooks/usePhoneNumber';
+import { AsyncSelect } from 'chakra-react-select';
 type InputFieldProps = FieldWrapperPassThroughProps & {
   registration: Partial<UseFormRegisterReturn>;
   inputStyle?: any;
   defaultValue?: any;
   options?: any;
-  country?: any;
   size?: string;
   setValue: any;
   name: string;
+  countryCodeName?: string;
 };
 
 export default function PhoneNumberInputField({
   size,
-  country,
   options,
   registration,
   defaultValue,
@@ -43,17 +34,52 @@ export default function PhoneNumberInputField({
   name,
   error,
   label,
+  countryCodeName = '',
+  inputStyle = {},
 }: InputFieldProps) {
-  const { number, onCountryChange, onPhoneNumberChange, selectedCountry } =
-    usePhoneNumber({
-      options,
-      country,
-      defaultValue,
-    });
+  const intl = useIntl();
+  const {
+    number,
+    onCountryChange,
+    onPhoneNumberChange,
+    countryCode,
+    coutriesOptions,
+  } = usePhoneNumber({
+    options,
+    country: options?.[0],
+    defaultValue,
+  });
+
+  useEffect(() => {
+    setValue(countryCodeName, countryCode);
+  }, [countryCode, setValue, countryCodeName]);
 
   useEffect(() => {
     setValue(name, number);
-  }, [number, setValue, name]);
+  }, [number, name, setValue]);
+  const handleChanges = (country: any) => {
+    onCountryChange(country as any);
+  };
+
+  const filterCountries = (inputValue: string) => {
+    const countries = coutriesOptions.filter(
+      (i: any) =>
+        i.name.toLowerCase().includes(inputValue.toLowerCase()) ||
+        i.translatedName.toLowerCase().includes(inputValue.toLowerCase()) ||
+        i.phoneCode.toLowerCase().includes(inputValue.toLowerCase()),
+    );
+
+    console.log('our countries is ', countries);
+
+    return countries;
+  };
+
+  const loadOptionsLauncher = (inputValue: string) =>
+    new Promise<any[]>((resolve) => {
+      setTimeout(() => {
+        resolve(filterCountries(inputValue));
+      }, 1000);
+    });
 
   return (
     <FieldWrapper error={error} label={label}>
@@ -63,70 +89,86 @@ export default function PhoneNumberInputField({
             Left={InputLeftElement}
             Right={InputRightElement}
             style={{
-              width: 130,
+              width: 150,
               h: '100%',
               px: 3,
             }}
           >
-            <Menu>
-              <MenuButton type="button">
-                <HStack>
-                  <Text textTransform={'capitalize'}>
-                    <If condition={selectedCountry?.name}>
-                      <FormattedMessage id={selectedCountry?.name} />
-                    </If>
-                  </Text>
-                  <Flag
-                    countryCode={selectedCountry?.value || ''}
-                    svg
-                    cdnUrl="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.3/flags/1x1/"
-                    cdnSuffix="svg"
-                    title={selectedCountry?.value || ''}
-                  />
-                </HStack>
-              </MenuButton>
-              <Box position={'relative'} bg="red">
-                <MenuList>
-                  {options.map((option: any, key: any) => (
-                    <MenuItem
-                      onClick={() => {
-                        onCountryChange(option);
-                      }}
-                      key={key}
-                      zIndex={3000}
-                    >
-                      <HStack>
-                        <Flag
-                          countryCode={option.value || ''}
-                          svg
-                          cdnUrl="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.3/flags/1x1/"
-                          cdnSuffix="svg"
-                          title={option.value || ''}
-                        />
-                        <Text textTransform={'capitalize'}>
-                          <If condition={option?.name}>
-                            <FormattedMessage id={option?.name} />
-                          </If>
-                        </Text>
-                      </HStack>
-                    </MenuItem>
-                  ))}
-                </MenuList>
-              </Box>
-            </Menu>
+            <Box>
+              <AsyncSelect
+                {...registration}
+                onChange={handleChanges}
+                cacheOptions
+                defaultOptions={coutriesOptions}
+                loadOptions={loadOptionsLauncher}
+                focusBorderColor="transparent"
+                selectedOptionColorScheme="primary"
+                errorBorderColor="transparent"
+                components={{
+                  NoOptionsMessage: () =>
+                    intl.formatMessage({ id: 'noOptions' }),
+                  LoadingMessage: () => intl.formatMessage({ id: 'loading' }),
+                }}
+                placeholder={intl.formatMessage({ id: 'theCountry' })}
+                options={[]}
+                // placeholder={placeholder}
+                defaultValue={{
+                  ...coutriesOptions?.[0],
+                }}
+                getOptionValue={(cell: any) => cell['value']}
+                getOptionLabel={(cell: any) =>
+                  `+(${cell['phoneCode']}) ${cell['translatedName']}`
+                }
+                chakraStyles={{
+                  //TODO: pass appropriate  type
+                  control: (provided: any) => ({
+                    ...provided,
+                    cursor: 'pointer',
+                    fontSize: 'sm',
+                    borderColor: 'transparent !important',
+                    textTransform: 'capitalize',
+                  }),
+                  menu: (provided: any) => ({
+                    ...provided,
+                    w: '200px',
+                    px: '10px',
+                    textTransform: 'capitalize',
+                    borderRadius: 'xl',
+                  }),
+                  dropdownIndicator: (provided) => ({
+                    ...provided,
+                    display: 'none',
+                  }),
+                }}
+              />
+            </Box>
+            {/* <Text
+              fontFamily="Cairo !important"
+              fontWeight="bold"
+              px="2px"
+              fontSize="sm"
+            >
+              {countryCode}
+            </Text> */}
           </Switcher>
           <Input
-            ps={130}
+            ps="150px"
             {...registration}
             // type="tel"
             value={number}
             onChange={onPhoneNumberChange}
             // variant="auth"
             // border="1px solid"
-            variant="auth"
-            {...inputStyles}
-            isInvalid
             h={50}
+            maxLength={9}
+            minLength={9}
+            onSubmit={() => {}}
+            {...inputStyle}
+            fontWeight="semibold"
+            fontSize="sm"
+            placeholder="XXXXXXXXX"
+            autocomplete="off"
+            fontFamily="Cairo, sans-serif !important"
           />
         </Flex>
       </InputGroup>
@@ -136,10 +178,10 @@ export default function PhoneNumberInputField({
 
 PhoneNumberInputField.defaultProps = {
   options: [
-    { value: 'DZ', name: 'algeria' },
-    // { value : "FR" , name : "france" },
-    // { value : "US" , name : "usa" },
     { value: 'SA', name: 'saudi' },
+    { value: 'DZ', name: 'algeria' },
+    { value: 'FR', name: 'france' },
+    { value: 'US', name: 'usa' },
   ],
   size: 'md',
   country: { value: 'DZ', name: 'algeria' },

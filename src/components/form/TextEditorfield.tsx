@@ -4,6 +4,9 @@ import { Box } from '@chakra-ui/react';
 import { UseFormRegisterReturn } from 'react-hook-form';
 import Editor from 'components/Editor/Editor';
 import { defaultFn } from 'utils/functions';
+import uuid from 'react-uuid';
+import { OutputData } from '@editorjs/editorjs';
+import { safingEditorOutput } from 'utils/editor';
 
 // // import ReactScrollbar from "react-scrollbar"
 // const ScrollArea = lazy(() => import('react-scrollbar'));
@@ -17,6 +20,8 @@ type TextEditorfieldProps = FieldWrapperPassThroughProps & {
   placeholder?: string;
   outlet?: any;
   setValue?: any;
+  defaultData?: OutputData;
+  holder?: string;
   [rest: string]: any;
 };
 
@@ -25,11 +30,15 @@ const TextEditorfield = ({
   error,
   label,
   setValue = defaultFn,
+  holder = uuid(),
+  defaultData = {
+    blocks: [],
+  },
   ...rest
 }: PropsWithChildren<TextEditorfieldProps>) => {
   const handleChangeEditorContent = (content: any) => {
     if (registration?.name) {
-      setValue(registration.name, JSON.stringify(content));
+      setValue(registration.name, content);
     }
   };
   return (
@@ -39,22 +48,16 @@ const TextEditorfield = ({
         borderColor="gray.300"
         bg="white"
         overflowY="scroll"
-        {...rest}
-        borderRadius="30px"
         px="30px"
         py="10px"
+        borderRadius="30px"
+        // id={holder}
+        {...rest}
       >
-        {/* <ReactScrollbar 
-            speed={0.8}
-            horizontal={false}
-            style={{
-                height:"100%",
-            }}
-          > */}
         <Editor
-          data={undefined}
+          data={safingEditorOutput(defaultData)}
           onChange={handleChangeEditorContent}
-          holder="editorjs-container"
+          holder={holder}
         />
         {/* </ReactScrollbar> */}
       </Box>

@@ -6,10 +6,27 @@ import { OrganizersRoutes } from 'features/organizer/routes';
 import { UsersRoutes } from 'features/users/routes';
 import { SellersRoutes } from 'features/seller/routes';
 
+const { SettingsRoutes } = lazyImport(
+  () => import('features/settings'),
+  'SettingsRoutes',
+);
+
+const { BlogsRoutes } = lazyImport(
+  () => import('features/blogs'),
+  'BlogsRoutes',
+);
+
+const { ServicesRoutes } = lazyImport(
+  () => import('features/services'),
+  'ServicesRoutes',
+);
+
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useUser } from 'lib/auth';
 import { Suspense, useEffect } from 'react';
-import { Center, Spinner } from '@chakra-ui/react';
+import { lazyImport } from 'utils/lazyImport';
+import Loader from 'components/loader/Loader';
+import { GuidesRoutes } from 'features/guide/routes';
 
 const App = () => {
   const navigate = useNavigate();
@@ -29,13 +46,7 @@ const App = () => {
   }, [user, navigate, location, isUserFetched]);
 
   return (
-    <Suspense
-      fallback={
-        <Center w="100vx" h="100vh">
-          <Spinner />
-        </Center>
-      }
-    >
+    <Suspense fallback={<Loader />}>
       <Outlet />
     </Suspense>
   );
@@ -73,6 +84,22 @@ export const protectedRoutes = [
       {
         path: '/dashboard/*',
         element: <DashboardRoutes />,
+      },
+      {
+        path: '/settings/*',
+        element: <SettingsRoutes />,
+      },
+      {
+        path: '/blog/*',
+        element: <BlogsRoutes />,
+      },
+      {
+        path: '/guides/*',
+        element: <GuidesRoutes />,
+      },
+      {
+        path: '/services/*',
+        element: <ServicesRoutes />,
       },
     ],
   },

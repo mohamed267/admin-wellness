@@ -3,8 +3,6 @@
 // storeName: string,
 
 import Cell from 'components/table/components/cell';
-import Price from 'components/table/components/price';
-import Status from 'components/table/components/status';
 import EventNameCell from '../components/table/EventNameCell';
 import EventMenuCell from '../components/table/EventMenuCell';
 import CouponReductionCell from '../components/table/coupon/CouponReduction';
@@ -15,6 +13,8 @@ import EventCategoryMenuCell from '../components/table/category/EventCategoryMen
 import TownCoverCell from '../components/table/city/TownCoverCell';
 import TownNameCell from '../components/table/city/TownNameCell';
 import EventTownMenuCell from '../components/table/city/EventTownMenuCell';
+import EventStatus from '../components/EventStatus';
+import DateCell from 'components/table/components/date';
 
 // orderNumber: number
 export const eventsColumns = [
@@ -26,7 +26,7 @@ export const eventsColumns = [
   {
     Header: 'publishingDate',
     accessor: 'createdAt',
-    Cell: Cell,
+    Cell: DateCell,
   },
   {
     Header: 'category',
@@ -34,14 +34,14 @@ export const eventsColumns = [
     Cell: Cell,
   },
   {
-    Header: 'price',
-    accessor: 'price',
-    Cell: Price,
+    Header: 'publisher',
+    accessor: 'publisher',
+    Cell: Cell,
   },
   {
     Header: 'status',
     accessor: 'status',
-    Cell: Status,
+    Cell: EventStatus,
   },
   {
     Header: '',

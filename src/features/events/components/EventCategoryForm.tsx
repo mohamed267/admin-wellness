@@ -46,7 +46,7 @@ const EventCategoryForm = () => {
       schema={schemaEvent}
       onSubmit={handleAddCategory}
     >
-      {({ register, formState, setValue }) => (
+      {({ register, formState, setValue, watch }) => (
         <Stack spacing="20px">
           <InputField
             registration={register('name')}
@@ -65,6 +65,7 @@ const EventCategoryForm = () => {
           <SingleImageField
             registration={register('image')}
             setValue={setValue}
+            watch={watch}
             name={'image'}
             imageType={'events'}
             label={'categoryIcon'}
@@ -85,6 +86,7 @@ const EventCategoryForm = () => {
             fontSize="18px"
             type="submit"
             isLoading={isCreatingCategory}
+            mt="40px"
           >
             <Text
               _firstLetter={{

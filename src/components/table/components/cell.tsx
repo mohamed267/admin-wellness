@@ -10,6 +10,7 @@ const Cell = ({ value }: CellProps) => {
       // textTransform={"capitalize"}
       fontSize="sm"
       px={2}
+      color="secondaryBlack.400"
     >
       {value}
     </Text>

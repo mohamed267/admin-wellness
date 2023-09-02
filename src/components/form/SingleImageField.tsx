@@ -17,6 +17,7 @@ import { RiDeleteBin7Fill } from 'react-icons/ri';
 import FileUploadBox from './FileUploadBox';
 import If from 'common/If';
 import ImageUploadIcon from 'assets/icons/uploads/imageUploadIcon';
+import { AnimatePresence, motion } from 'framer-motion';
 
 type InputFieldProps = FieldWrapperPassThroughProps & {
   registration: Partial<UseFormRegisterReturn>;
@@ -25,6 +26,7 @@ type InputFieldProps = FieldWrapperPassThroughProps & {
   name?: string;
   defaultValue?: string | null;
   imageType: string;
+  watch: any;
 };
 
 const SingleImageField = ({
@@ -32,18 +34,25 @@ const SingleImageField = ({
   error,
   label,
   setValue = () => {},
-  defaultValue,
+  defaultValue = null,
   name = 'media',
   imageType,
+  watch,
 }: InputFieldProps) => {
   // let uuid = 1
   const [black200] = useToken('colors', ['black.200']);
   const addRef = useRef<any>(null);
-  const [image, setImage] = useState<any>(
-    defaultValue ? { url: defaultValue, _old: true } : null,
-  );
-
+  const image = watch?.(name);
+  // const [image, setImage] = useState<any>(
+  //   defaultValue ? { url: defaultValue, _old: true } : null,
+  // );
   const [file, setFile] = useState<any>(null);
+
+  useEffect(() => {
+    if (defaultValue) {
+      setValue(name, { url: defaultValue, isOld: true });
+    }
+  }, [defaultValue]);
 
   const addFile = () => {
     const fileInput = addRef?.current;
@@ -51,18 +60,12 @@ const SingleImageField = ({
     inputFile && setFile(inputFile);
   };
   const handleImageUploaded = (url: string) => {
-    setImage({ url });
+    setValue(name, { url });
     setFile(null);
   };
   const deleteImage = () => {
-    setImage(null);
+    setValue(name, null);
   };
-
-  useEffect(() => {
-    if (!image?._old) {
-      setValue(name, image);
-    }
-  }, [image]);
 
   return (
     <FieldWrapper error={error} label={label}>
@@ -73,8 +76,8 @@ const SingleImageField = ({
       >
         <If condition={image}>
           <Center
-            w={{ base: 50, lg: 150 }}
-            h={{ base: 50, lg: 130 }}
+            w={{ base: '100px', md: '150px' }}
+            h={{ base: '100px', md: '130px' }}
             cursor="pointer"
             borderRadius="3xl"
             position={'relative'}
@@ -136,16 +139,28 @@ const SingleImageField = ({
           </Center>
         </If>
       </Flex>
-      <Stack>
-        <If condition={file}>
-          <FileUploadBox
+      <AnimatePresence>
+        {file && (
+          <Stack
             key={uuid()}
-            file={file}
-            uploaded={handleImageUploaded}
-            imageType={imageType}
-          />
-        </If>
-      </Stack>
+            as={motion.div}
+            exit={{
+              x: '-300px',
+              opacity: 0,
+              transition: {
+                duration: 0.7,
+              },
+            }}
+          >
+            <FileUploadBox
+              key={uuid()}
+              file={file}
+              uploaded={handleImageUploaded}
+              imageType={imageType}
+            />
+          </Stack>
+        )}
+      </AnimatePresence>
     </FieldWrapper>
   );
 };

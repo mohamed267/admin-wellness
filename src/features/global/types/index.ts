@@ -7,8 +7,10 @@ export type Meta = {
 };
 
 export type Media = {
+  id: string;
   type: string;
   url: string;
+  isNew: boolean;
 };
 
 export type BaseEntity = {

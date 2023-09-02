@@ -10,7 +10,7 @@ export const globalStyles = {
       200: '#99FFF5',
       300: '#85FFF3',
       400: '#00E0CA',
-      500: '#00A18E',
+      500: '#19915F',
       600: '#007B73',
       700: '#00665C',
       800: '#003D37',
@@ -28,10 +28,10 @@ export const globalStyles = {
 
     sidebar: {
       active: {
-        iconStroke: '#00A18E',
-        iconFill: '#00A18E',
-        text: '#00A18E',
-        identifier: '#00A18E',
+        iconStroke: '#19915F',
+        iconFill: '#19915F',
+        text: '#19915F',
+        identifier: '#19915F',
       },
       logout: {
         iconStroke: '#FB6B63',
@@ -59,6 +59,7 @@ export const globalStyles = {
     },
 
     blue: {
+      500: '#1C7ED6',
       900: '#04103B',
     },
     black: {
@@ -68,6 +69,9 @@ export const globalStyles = {
     youtube: '#CD201F',
     facebook: '#1976D2',
     twitter: '#03A9F4',
+    secondaryBlack: {
+      400: '#8992A9',
+    },
     secondaryGray: {
       100: '#E0E5F2',
       200: '#E1E9F8',
@@ -111,6 +115,9 @@ export const globalStyles = {
     red: {
       500: '#FF0000',
     },
+    danger: {
+      500: '#FB6B63',
+    },
     yellow: {
       400: '#EEFF01',
     },
@@ -128,6 +135,16 @@ export const globalStyles = {
       },
       html: {
         fontFamily: "'Roboto', sans-serif",
+      },
+      '.ce-tune-alignment--right': {
+        p: {
+          textAlign: 'right !important',
+        },
+      },
+      '.ce-tune-alignment--left': {
+        p: {
+          textAlign: 'left !important',
+        },
       },
       '*::-webkit-scrollbar': {
         display: 'none !important',

@@ -46,7 +46,7 @@ const EventTownForm = () => {
       schema={schemaEvent}
       onSubmit={handleAddTown}
     >
-      {({ register, formState, setValue }) => (
+      {({ register, formState, setValue, watch }) => (
         <Stack spacing="20px">
           <InputField
             registration={register('name')}
@@ -68,6 +68,7 @@ const EventTownForm = () => {
             name={'image'}
             imageType={'city'}
             label={'cityCover'}
+            watch={watch}
             inputStyle={{
               variant: 'primary',
               fontSize: 'sm',

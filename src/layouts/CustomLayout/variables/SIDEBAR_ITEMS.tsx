@@ -51,10 +51,10 @@ export const SIDEBAR_ITEMS: Array<SideBarItem> = [
     activeKey: '/blog',
   },
   {
-    label: 'guide',
+    label: 'guides',
     icon: Guide,
-    href: '/guide',
-    activeKey: '/guide',
+    href: '/guides',
+    activeKey: '/guides',
   },
   {
     label: 'settings',
