@@ -9,4 +9,7 @@ export const STORE_URL = `${Api_Host}store/`;
 export const CHAT_URL = `${Api_Host}chat/`;
 
 export const GUIDE_URL = `${Api_Host}guide/`;
+
 export const GUIDE_CATEGORY_URL = `${Api_Host}guide-category/`;
+
+export const CITY_URL = `${Api_Host}city/`;

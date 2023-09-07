@@ -87,7 +87,7 @@ const AddPlanForm = () => {
       schema={schemaPlan}
       onSubmit={handleCreatePlan}
     >
-      {({ register, formState, setValue }) => (
+      {({ register, formState, setValue, watch }) => (
         <Stack>
           <Flex gap="10px" flexWrap="wrap" py="10px">
             <InputField
@@ -131,6 +131,7 @@ const AddPlanForm = () => {
                   w: '50%',
                 }}
                 setValue={setValue}
+                watch={watch}
                 name="price"
                 inputStyle={{
                   variant: 'primary',

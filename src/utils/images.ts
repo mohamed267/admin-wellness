@@ -5,6 +5,7 @@ import {
   STORE_URL,
   GUIDE_URL,
   GUIDE_CATEGORY_URL,
+  CITY_URL,
 } from 'consts/imageFolders';
 
 export const joinProfileImage = (
@@ -33,4 +34,8 @@ export const joinguideCategoryImage = (
   imageUrl: string | null | undefined,
 ): string => {
   return imageUrl ? `${GUIDE_CATEGORY_URL}${imageUrl}` : '';
+};
+
+export const joinCityImage = (imageUrl: string | null | undefined): string => {
+  return imageUrl ? `${CITY_URL}${imageUrl}` : '';
 };

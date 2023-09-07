@@ -5,34 +5,44 @@ import SidebarContent from './Sidebar/SidebarContent';
 import { Outlet } from 'react-router-dom';
 import SearchBar from 'components/SearchBar';
 import Sec from 'assets/icons/navbar/Sec';
+import { SearchContext } from 'contexts/searchContext';
+import { useState } from 'react';
 
 const CustomLayouts = () => {
+  const [search, setSearch] = useState('');
   return (
-    <Box>
-      <SidebarContent />
-      <Box
-        marginLeft={{
-          base: 0,
-          md: '250px',
-        }}
-      >
-        <Stack px="30px" py="30px" spacing="30px">
-          <HStack justifyContent="space-between">
-            <SearchBar width={'600px'} placeholder="Search" />
+    <SearchContext.Provider
+      value={{
+        search,
+        setSearch,
+      }}
+    >
+      <Box>
+        <SidebarContent />
+        <Box
+          marginLeft={{
+            base: 0,
+            md: '250px',
+          }}
+        >
+          <Stack px="30px" py="30px" spacing="30px">
+            <HStack justifyContent="space-between">
+              <SearchBar width={'600px'} placeholder="Search" />
 
-            <HStack bg="white" borderRadius="3xl" px="20px" py="8px" h="100%">
-              <Icon fill="primary.500" w="24px" h="24px">
-                <Sec />
-              </Icon>
-              <Text fontSize="16px" color="gray.900">
-                zaydi abda9A
-              </Text>
+              <HStack bg="white" borderRadius="3xl" px="20px" py="8px" h="100%">
+                <Icon fill="primary.500" w="24px" h="24px">
+                  <Sec />
+                </Icon>
+                <Text fontSize="16px" color="gray.900">
+                  zaydi abda9A
+                </Text>
+              </HStack>
             </HStack>
-          </HStack>
-          <Outlet />
-        </Stack>
+            <Outlet />
+          </Stack>
+        </Box>
       </Box>
-    </Box>
+    </SearchContext.Provider>
   );
 };
 

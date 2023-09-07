@@ -8,6 +8,7 @@ import { GuideCategoryEntity } from 'features/guide/types';
 import AddCategoryIcon from 'assets/icons/category/AddCategoryIcon';
 import { guidecategoriesColumn } from 'features/guide/variables/table';
 import { useEffect } from 'react';
+import GuideCategoryUtils from 'features/guide/components/table/category/GuideCategoryUtils';
 // import { useCoupons } from '../api/getCoupons'
 // import TableComponent from 'components/table/Table'
 // import { Coupon } from '../types'
@@ -88,6 +89,7 @@ const ListGuideCategories = () => {
         pageIndex={page}
         pageCount={categories?.meta?.totalPages ?? 1}
         paginated={true}
+        TableUtils={GuideCategoryUtils}
         //
         // searching={setSearch}
         // detailsIcon={true}

@@ -18,6 +18,7 @@ import { useGuides } from '../apis/getGuides';
 import TableComponent from 'components/table/Table';
 import { GuideListEntity } from '../types';
 import ExpendedGuideRow from '../components/table/ExpendedGuideRow';
+import GuideUtils from '../components/table/GuideUtils';
 
 const ListGuides = () => {
   const [pageIndex, setPageIndex] = useState<number>(1);
@@ -154,6 +155,7 @@ const ListGuides = () => {
         pageCount={guides?.meta?.totalPages ?? 1}
         paginated={true}
         ExpendedRow={ExpendedGuideRow}
+        TableUtils={GuideUtils}
         //
         // searching={setSearch}
         // detailsIcon={true}

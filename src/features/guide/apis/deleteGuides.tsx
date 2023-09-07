@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 // import { useNotification } from 'stores/notification';
 
-export const useDeleteGuidecategories = () => {
+export const useDeleteGuides = () => {
   const navigate = useNavigate();
   // const { addNotification } = useNotification();
 
@@ -26,11 +26,15 @@ export const useDeleteGuidecategories = () => {
     onSuccess: () => {
       navigate(0);
     },
-    mutationFn: deleteGuidecategories,
+    mutationFn: deleteGuides,
   });
 };
 
-export const deleteGuidecategories = async (ids: any): Promise<any> => {
-  const categoriesDeleted = await axios.delete(`/api/guides/many?ids=${ids}`);
-  return categoriesDeleted;
+export const deleteGuides = async (ids: string[]): Promise<any> => {
+  const guides = await axios.delete(`/api/guides/many`, {
+    data: {
+      ids,
+    },
+  });
+  return guides;
 };

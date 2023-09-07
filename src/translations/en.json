@@ -120,5 +120,6 @@
     "guideCategories": "guide categories",
     "deleteEventAction": "delete event",
     "pending": "pending",
-    "activate": "activate"
+    "activate": "activate",
+    "rowsSelected": "row selected"
 }

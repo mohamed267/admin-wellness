@@ -12,7 +12,7 @@ import {
   EventTownListItem,
 } from '../types';
 import { Media } from 'features/global';
-import { joinEventImage } from 'utils/images';
+import { joinCityImage, joinEventImage } from 'utils/images';
 
 export const extractEvents = (
   eventRespose: EventResponse[],
@@ -60,7 +60,7 @@ export const extactEventCategories = (
       id: eventCategory?.id,
       name: eventCategory?.name,
       createdAt: eventCategory?.createdAt,
-      image: eventCategory?.image,
+      image: joinEventImage(eventCategory?.image),
       consultData: {
         id: eventCategory?.id,
       },
@@ -76,7 +76,7 @@ export const extactEventTowns = (
       id: eventTown?.id,
       name: eventTown?.name,
       createdAt: eventTown?.createdAt,
-      image: eventTown?.image,
+      image: joinCityImage(eventTown?.image),
       consultData: {
         id: eventTown?.id,
       },

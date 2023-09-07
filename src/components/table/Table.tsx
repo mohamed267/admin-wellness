@@ -18,7 +18,7 @@ import {
 
 import { useTable, useRowSelect } from 'react-table';
 
-import { FC, useEffect, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 
 // import Pagination from '@mui/material/Pagination';
 import { Table, Tbody, Td, Th, Tr } from '@chakra-ui/react';
@@ -124,21 +124,13 @@ const TableComponent = <Entry extends { id: string }>({
 
   const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100');
 
-  useEffect(() => {
-    console.log('our table select => ', table);
-  }, [table]);
-
-  useEffect(() => {
-    console.log('our slected flat rows => ', selectedFlatRows);
-  }, [selectedFlatRows]);
-
   return (
     <Stack gap="30px" bg="transparent">
       <Box bg="white" borderRadius="xl" overflow="hidden">
         <HStack px="16px" py="16px" justifyContent="space-between">
           <Text fontSize="14px" color="gray.600">
             {' '}
-            {selectedFlatRows?.length} row selected
+            {selectedFlatRows?.length} <FormattedMessage id="rowsSelected" />
           </Text>
           {TableUtils && (
             <TableUtils

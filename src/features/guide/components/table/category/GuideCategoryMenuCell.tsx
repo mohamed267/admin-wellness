@@ -15,12 +15,12 @@ import { TableMenuItem } from 'types';
 import TableMenuIcon from 'assets/icons/table/TableMenuIcon';
 import EditPencil from 'assets/icons/table/EditPencil';
 import DeleteBinTableIcon from 'assets/icons/table/DeleteBinTableIcon';
-import { useDeleteGuidecategories } from 'features/guide/apis/categories/deleteCategories';
 import { Link } from 'react-router-dom';
 import { defaultFn } from 'utils/functions';
+import { useDeleteGuideCategories } from 'features/guide/apis/categories/deleteGuideCategories';
 
 const GuideCategoryMenuCell = ({ value }: any) => {
-  const { mutate: deleteCategories } = useDeleteGuidecategories();
+  const { mutate: deleteCategories } = useDeleteGuideCategories();
 
   const menuItems: TableMenuItem[] = [
     {

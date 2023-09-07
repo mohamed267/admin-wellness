@@ -21,9 +21,11 @@ import StatisticsIcon from 'assets/icons/table/StatisticsIcon';
 // import { useDeleteGuide } from 'features/guides/api/deleteGuide';
 import { defaultFn } from 'utils/functions';
 import { Link } from 'react-router-dom';
+import { useDeleteGuides } from 'features/guide/apis/deleteGuides';
+import DeleteBinTableIcon from 'assets/icons/table/DeleteBinTableIcon';
 
 const GuideMenuCell = ({ value }: any) => {
-  // const { mutate: deleteGuide } = useDeleteGuide();
+  const { mutate: deleteGuides } = useDeleteGuides();
 
   const menuItems: TableMenuItem[] = [
     {
@@ -31,13 +33,13 @@ const GuideMenuCell = ({ value }: any) => {
       Icon: EditPencil,
       link: `/guides/${value?.id}`,
     },
-    // {
-    //   title: 'delete',
-    //   Icon: DeleteBinTableIcon,
-    //   onClick: () => {
-    //     deleteGuide({ guideId: value?.id });
-    //   },
-    // },
+    {
+      title: 'delete',
+      Icon: DeleteBinTableIcon,
+      onClick: () => {
+        deleteGuides([value?.id]);
+      },
+    },
     {
       title: 'pause',
       Icon: PauseTableIcon,

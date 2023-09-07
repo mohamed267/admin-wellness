@@ -10,6 +10,9 @@ import {
 import Switcher from 'common/Switcher';
 import { BsSearch } from 'react-icons/bs';
 import { useIntl } from 'react-intl';
+import { useState } from 'react';
+// import debounce from 'lodash.debounce';
+// import { useSearchContext } from 'contexts/searchContext';
 
 type SearchBarProps = {
   width?: number | string;
@@ -17,6 +20,25 @@ type SearchBarProps = {
 };
 
 const SearchBar = ({ width = '60%', placeholder = '' }: SearchBarProps) => {
+  const [currentSearch, setCurrentSearch] = useState('');
+  // const { search, setSearch } = useSearchContext();
+
+  // const handleChageSearch = () => {
+  //   setSearch(currentSearch);
+  // };
+
+  // const debouncedResults = useMemo(() => {
+  //   return debounce(handleChageSearch, 300);
+  // }, [currentSearch]);
+
+  const handleChangeCurrentSearch = (e: any) => {
+    setCurrentSearch(e.target.value);
+  };
+
+  // useEffect(() => {
+  //   debouncedResults();
+  // }, [currentSearch]);
+
   const int1 = useIntl();
   const {
     getButtonProps,
@@ -59,6 +81,8 @@ const SearchBar = ({ width = '60%', placeholder = '' }: SearchBarProps) => {
           h="100%"
           onFocus={onSearchFocus}
           onBlur={onSearchClose}
+          onChange={handleChangeCurrentSearch}
+          value={currentSearch}
           placeholder={
             placeholder ? int1.formatMessage({ id: placeholder }) : ''
           }
